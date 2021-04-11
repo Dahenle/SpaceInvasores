@@ -81,7 +81,12 @@ public class Test extends javax.swing.JFrame {
         jButton2.setBounds(310, 190, 250, 60);
 
         jButton3.setFont(new java.awt.Font("Copperplate", 3, 18)); // NOI18N
-        jButton3.setText("Boss");
+        jButton3.setText("Boss :O");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton3);
         jButton3.setBounds(310, 270, 250, 60);
 
@@ -109,6 +114,10 @@ public class Test extends javax.swing.JFrame {
         facil.setSize(590, 400);
         facil.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
