@@ -5,6 +5,8 @@
  */
 package spaceinvaders;
 
+import java.awt.event.KeyEvent;
+
 /**
  *
  * @author nataliamartinezdiaz
@@ -28,31 +30,68 @@ public class Facil extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        navecita = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                formKeyPressed(evt);
+            }
+        });
         getContentPane().setLayout(null);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fondos/Fondo con gradiente.jpg"))); // NOI18N
-        jLabel1.setText("jLabel1");
+        jPanel1.setLayout(null);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+        navecita.setIcon(new javax.swing.ImageIcon(getClass().getResource("/naves/playerShip2_blue.png"))); // NOI18N
+        navecita.setText("jLabel3");
+        jPanel1.add(navecita);
+        navecita.setBounds(250, 80, 160, 230);
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fondos/Fondo con gradiente.jpg"))); // NOI18N
+        jLabel2.setText("jLabel2");
+        jPanel1.add(jLabel2);
+        jLabel2.setBounds(-90, -230, 860, 620);
 
         getContentPane().add(jPanel1);
-        jPanel1.setBounds(0, 0, 660, 480);
+        jPanel1.setBounds(0, 60, 660, 420);
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
+        int derecha = navecita.getX();
+        int izquierda = navecita.getY();
+        
+        if (evt.getKeyChar() == 'a' || evt.getKeyChar() == 'A'){
+            derecha -= 8;
+            navecita.setLocation(derecha, izquierda);
+           
+        }
+        
+        if (evt.getKeyChar() == 'd' || evt.getKeyChar() == 'D'){
+            derecha += 8;
+            navecita.setLocation(derecha, izquierda);
+           
+        }
+        
+        if (evt.getExtendedKeyCode() == KeyEvent.VK_LEFT){
+            derecha -= 8;
+            navecita.setLocation(derecha, izquierda);
+           
+        }
+        
+        if (evt.getExtendedKeyCode() == KeyEvent.VK_RIGHT){
+            derecha += 8;
+            navecita.setLocation(derecha, izquierda);
+           
+        }
+        
+        
+
+// TODO add your handling code here:
+    }//GEN-LAST:event_formKeyPressed
 
     /**
      * @param args the command line arguments
@@ -90,7 +129,8 @@ public class Facil extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel navecita;
     // End of variables declaration//GEN-END:variables
 }
