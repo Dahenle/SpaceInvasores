@@ -2,7 +2,7 @@ package spaceinvaders;
 
 public class Test extends javax.swing.JFrame {
 
-    String nombre,nave;
+    String nombre,nave,navecita1;
     
     public Test(String nombre, String nave) {
         initComponents();
@@ -16,14 +16,18 @@ public class Test extends javax.swing.JFrame {
         //condicional nave
         if (nave.matches("roja")==true){
             Nave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/naves/playerShip2_red.png")));
+            this.navecita1="roja";
         }else{
             if (nave.matches("azul")==true){
                Nave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/naves/playerShip2_blue.png")));
+               this.navecita1="azul";
             }else{
                 if (nave.matches("verde")==true){
                     Nave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/naves/playerShip2_green.png")));
+                    this.navecita1="verde";
                 }else{
                     Nave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/naves/playerShip2_orange.png")));
+                    this.navecita1="naranja";
                 }
             }  
         }
@@ -81,7 +85,7 @@ public class Test extends javax.swing.JFrame {
         jButton2.setBounds(310, 190, 250, 60);
 
         jButton3.setFont(new java.awt.Font("Copperplate", 3, 18)); // NOI18N
-        jButton3.setText("Boss :O");
+        jButton3.setText("Boss ");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -109,7 +113,7 @@ public class Test extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         this.dispose();
-        Facil facil = new Facil();
+        Facil facil = new Facil(navecita1);
         facil.setResizable(false);
         facil.setSize(590, 400);
         facil.setVisible(true);

@@ -42,7 +42,7 @@ public class Nombre extends javax.swing.JFrame {
         Title1.setForeground(new java.awt.Color(255, 255, 255));
         Title1.setText("Ingresa tu nombre");
         nombre.add(Title1);
-        Title1.setBounds(50, 130, 500, 80);
+        Title1.setBounds(50, 140, 500, 80);
 
         jTextField1.setFont(new java.awt.Font("Noteworthy", 1, 22)); // NOI18N
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
@@ -61,7 +61,7 @@ public class Nombre extends javax.swing.JFrame {
             }
         });
         nombre.add(jButton1);
-        jButton1.setBounds(240, 280, 100, 27);
+        jButton1.setBounds(240, 280, 100, 30);
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fondos/fondo.gif"))); // NOI18N
         jLabel2.setText("jLabel1");

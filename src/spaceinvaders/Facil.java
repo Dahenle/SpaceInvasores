@@ -13,11 +13,30 @@ import java.awt.event.KeyEvent;
  */
 public class Facil extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Facil
-     */
-    public Facil() {
+    String navecita1;
+    public Facil(String navecita1) {
         initComponents();
+        this.navecita1=navecita1;
+        switch (navecita1){
+            case "roja":
+                navecita.setIcon(new javax.swing.ImageIcon(getClass().getResource("/naves/playerShip2_red.png")));
+            break;
+            
+            case "azul":
+                navecita.setIcon(new javax.swing.ImageIcon(getClass().getResource("/naves/playerShip2_blue.png")));
+            
+            break;
+            case "verde":
+                navecita.setIcon(new javax.swing.ImageIcon(getClass().getResource("/naves/playerShip2_green.png")));
+            break;
+            case "naranja":
+                navecita.setIcon(new javax.swing.ImageIcon(getClass().getResource("/naves/playerShip2_orange.png")));
+            break;    
+        }
+    }
+
+    private Facil() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**
@@ -31,7 +50,7 @@ public class Facil extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         navecita = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addKeyListener(new java.awt.event.KeyAdapter() {
@@ -42,19 +61,16 @@ public class Facil extends javax.swing.JFrame {
         getContentPane().setLayout(null);
 
         jPanel1.setLayout(null);
-
-        navecita.setIcon(new javax.swing.ImageIcon(getClass().getResource("/naves/playerShip2_blue.png"))); // NOI18N
-        navecita.setText("jLabel3");
         jPanel1.add(navecita);
-        navecita.setBounds(250, 80, 160, 230);
+        navecita.setBounds(230, 270, 110, 100);
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fondos/Fondo con gradiente.jpg"))); // NOI18N
-        jLabel2.setText("jLabel2");
-        jPanel1.add(jLabel2);
-        jLabel2.setBounds(-90, -230, 860, 620);
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fondos/Fondo con gradiente.jpg"))); // NOI18N
+        jLabel1.setText("jLabel1");
+        jPanel1.add(jLabel1);
+        jLabel1.setBounds(0, 0, 600, 400);
 
         getContentPane().add(jPanel1);
-        jPanel1.setBounds(0, 60, 660, 420);
+        jPanel1.setBounds(0, 0, 600, 400);
 
         pack();
         setLocationRelativeTo(null);
@@ -129,7 +145,7 @@ public class Facil extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel navecita;
     // End of variables declaration//GEN-END:variables
