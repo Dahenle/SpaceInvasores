@@ -7,16 +7,19 @@ package spaceinvaders;
 
 import java.awt.event.KeyEvent;
 
+
 /**
  *
  * @author nataliamartinezdiaz
  */
 public class Facil extends javax.swing.JFrame {
 
-    String navecita1;
-    public Facil(String navecita1) {
+    String navecita1,nombre;
+
+    public Facil(String navecita1,String nombre) {
         initComponents();
         this.navecita1=navecita1;
+        this.nombre=nombre;
         switch (navecita1){
             case "roja":
                 navecita.setIcon(new javax.swing.ImageIcon(getClass().getResource("/naves/playerShip2_red.png")));
@@ -24,15 +27,16 @@ public class Facil extends javax.swing.JFrame {
             
             case "azul":
                 navecita.setIcon(new javax.swing.ImageIcon(getClass().getResource("/naves/playerShip2_blue.png")));
-            
-            break;
+                break;
+     
             case "verde":
                 navecita.setIcon(new javax.swing.ImageIcon(getClass().getResource("/naves/playerShip2_green.png")));
-            break;
+                break;
             case "naranja":
                 navecita.setIcon(new javax.swing.ImageIcon(getClass().getResource("/naves/playerShip2_orange.png")));
-            break;    
+                break;       
         }
+        
     }
 
     private Facil() {
@@ -50,7 +54,8 @@ public class Facil extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         navecita = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        JLabel = new javax.swing.JLabel();
+        laser = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addKeyListener(new java.awt.event.KeyAdapter() {
@@ -64,10 +69,11 @@ public class Facil extends javax.swing.JFrame {
         jPanel1.add(navecita);
         navecita.setBounds(230, 270, 110, 100);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fondos/Fondo con gradiente.jpg"))); // NOI18N
-        jLabel1.setText("jLabel1");
-        jPanel1.add(jLabel1);
-        jLabel1.setBounds(0, 0, 600, 400);
+        JLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fondos/facil1.gif"))); // NOI18N
+        jPanel1.add(JLabel);
+        JLabel.setBounds(0, 0, 600, 400);
+        jPanel1.add(laser);
+        laser.setBounds(350, 320, 30, 40);
 
         getContentPane().add(jPanel1);
         jPanel1.setBounds(0, 0, 600, 400);
@@ -82,8 +88,7 @@ public class Facil extends javax.swing.JFrame {
         
         if (evt.getKeyChar() == 'a' || evt.getKeyChar() == 'A'){
             derecha -= 8;
-            navecita.setLocation(derecha, izquierda);
-           
+            navecita.setLocation(derecha, izquierda);   
         }
         
         if (evt.getKeyChar() == 'd' || evt.getKeyChar() == 'D'){
@@ -94,16 +99,13 @@ public class Facil extends javax.swing.JFrame {
         
         if (evt.getExtendedKeyCode() == KeyEvent.VK_LEFT){
             derecha -= 8;
-            navecita.setLocation(derecha, izquierda);
-           
+            navecita.setLocation(derecha, izquierda); 
         }
         
         if (evt.getExtendedKeyCode() == KeyEvent.VK_RIGHT){
             derecha += 8;
-            navecita.setLocation(derecha, izquierda);
-           
+            navecita.setLocation(derecha, izquierda);  
         }
-        
         
 
 // TODO add your handling code here:
@@ -145,8 +147,9 @@ public class Facil extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel JLabel;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel laser;
     private javax.swing.JLabel navecita;
     // End of variables declaration//GEN-END:variables
 }

@@ -81,6 +81,11 @@ public class Test extends javax.swing.JFrame {
 
         jButton2.setFont(new java.awt.Font("Copperplate", 3, 18)); // NOI18N
         jButton2.setText("Dificil");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton2);
         jButton2.setBounds(310, 190, 250, 60);
 
@@ -113,7 +118,7 @@ public class Test extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         this.dispose();
-        Facil facil = new Facil(navecita1);
+        Facil facil = new Facil(navecita1,nombre);
         facil.setResizable(false);
         facil.setSize(590, 400);
         facil.setVisible(true);
@@ -122,6 +127,15 @@ public class Test extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        this.dispose();
+        Dificil dificil = new Dificil();
+        dificil.setResizable(false);
+        dificil.setSize(590, 400);
+        dificil.setVisible(true);
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
