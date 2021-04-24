@@ -68,22 +68,22 @@ public class Facil extends javax.swing.JFrame {
 
         jPanel1.setLayout(null);
         jPanel1.add(navecita);
-        navecita.setBounds(250, 260, 110, 100);
+        navecita.setBounds(250, 380, 110, 100);
 
         lacercito.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lasers/laserBlue16.png"))); // NOI18N
         jPanel1.add(lacercito);
-        lacercito.setBounds(300, 290, 13, 70);
+        lacercito.setBounds(300, 310, 13, 70);
 
         JLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fondos/facil1.gif"))); // NOI18N
         jPanel1.add(JLabel);
-        JLabel.setBounds(0, 0, 600, 400);
+        JLabel.setBounds(0, 0, 650, 490);
         jPanel1.add(laser);
         laser.setBounds(350, 320, 30, 40);
 
         getContentPane().add(jPanel1);
-        jPanel1.setBounds(0, 0, 610, 400);
+        jPanel1.setBounds(0, 0, 650, 490);
 
-        pack();
+        setSize(new java.awt.Dimension(650, 518));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
