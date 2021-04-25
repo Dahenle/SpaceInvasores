@@ -19,6 +19,7 @@ public class Facil extends javax.swing.JFrame {
 
     String navecita1,nombre;
     Timer timer;
+    String colorlaser;
 
     public Facil(String navecita1,String nombre) {
         initComponents();
@@ -27,17 +28,21 @@ public class Facil extends javax.swing.JFrame {
         switch (navecita1){
             case "roja":
                 navecita.setIcon(new javax.swing.ImageIcon(getClass().getResource("/naves/playerShip2_red.png")));
+                colorlaser="/lasers/laserRed01.png";
             break;
             
             case "azul":
                 navecita.setIcon(new javax.swing.ImageIcon(getClass().getResource("/naves/playerShip2_blue.png")));
+                colorlaser="/lasers/laserBlue16.png";
                 break;
      
             case "verde":
                 navecita.setIcon(new javax.swing.ImageIcon(getClass().getResource("/naves/playerShip2_green.png")));
+                colorlaser="/lasers/laserGreen11.png";
                 break;
             case "naranja":
                 navecita.setIcon(new javax.swing.ImageIcon(getClass().getResource("/naves/playerShip2_orange.png")));
+                colorlaser="/lasers/fire06.png";
                 break;       
         }
         
@@ -76,10 +81,10 @@ public class Facil extends javax.swing.JFrame {
         JLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fondos/facil1.gif"))); // NOI18N
         JLabel.setPreferredSize(new java.awt.Dimension(710, 500));
         jPanel1.add(JLabel);
-        JLabel.setBounds(0, 0, 710, 500);
+        JLabel.setBounds(0, 0, 750, 520);
 
         getContentPane().add(jPanel1);
-        jPanel1.setBounds(0, 0, 710, 500);
+        jPanel1.setBounds(0, 0, 740, 520);
 
         setSize(new java.awt.Dimension(734, 547));
         setLocationRelativeTo(null);
@@ -108,7 +113,7 @@ public class Facil extends javax.swing.JFrame {
 
             JLabel laserxd = new JLabel();
             laserxd.setLocation(navecita.getX()+50, navecita.getY()+40);
-            laserxd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lasers/laserBlue16.png")));
+            laserxd.setIcon(new javax.swing.ImageIcon(getClass().getResource(colorlaser)));
             laserxd.setSize(20, 60);
             jPanel1.add(laserxd, 1);
             jPanel1.validate();
