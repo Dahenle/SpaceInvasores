@@ -120,7 +120,7 @@ public class Test extends javax.swing.JFrame {
         this.dispose();
         Facil facil = new Facil(navecita1,nombre);
         facil.setResizable(false);
-        facil.setSize(650, 490);
+        facil.setSize(716,500);
         facil.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 

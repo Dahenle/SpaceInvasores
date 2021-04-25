@@ -6,6 +6,9 @@
 package spaceinvaders;
 
 import java.awt.event.KeyEvent;
+import java.util.Timer;
+import java.util.TimerTask;
+import javax.swing.JLabel;
 
 
 /**
@@ -15,6 +18,7 @@ import java.awt.event.KeyEvent;
 public class Facil extends javax.swing.JFrame {
 
     String navecita1,nombre;
+    Timer timer;
 
     public Facil(String navecita1,String nombre) {
         initComponents();
@@ -54,9 +58,7 @@ public class Facil extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         navecita = new javax.swing.JLabel();
-        lacercito = new javax.swing.JLabel();
         JLabel = new javax.swing.JLabel();
-        laser = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addKeyListener(new java.awt.event.KeyAdapter() {
@@ -66,105 +68,69 @@ public class Facil extends javax.swing.JFrame {
         });
         getContentPane().setLayout(null);
 
+        jPanel1.setPreferredSize(new java.awt.Dimension(710, 500));
         jPanel1.setLayout(null);
         jPanel1.add(navecita);
-        navecita.setBounds(250, 380, 110, 100);
-
-        lacercito.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lasers/laserBlue16.png"))); // NOI18N
-        jPanel1.add(lacercito);
-        lacercito.setBounds(300, 310, 13, 70);
+        navecita.setBounds(300, 350, 120, 130);
 
         JLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fondos/facil1.gif"))); // NOI18N
+        JLabel.setPreferredSize(new java.awt.Dimension(710, 500));
         jPanel1.add(JLabel);
-        JLabel.setBounds(0, 0, 650, 490);
-        jPanel1.add(laser);
-        laser.setBounds(350, 320, 30, 40);
+        JLabel.setBounds(0, 0, 710, 500);
 
         getContentPane().add(jPanel1);
-        jPanel1.setBounds(0, 0, 650, 490);
+        jPanel1.setBounds(0, 0, 710, 500);
 
-        setSize(new java.awt.Dimension(650, 518));
+        setSize(new java.awt.Dimension(734, 547));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
-        int derecha = navecita.getX();
-        int izquierda = navecita.getY();
-        int x = lacercito.getX();
-        int y = lacercito.getY();
+        int x_nav = navecita.getX();
+        int y_nav = navecita.getY();
         
         
-        if (evt.getKeyChar() == 'a' || evt.getKeyChar() == 'A'){
-            derecha -= 8;
-            navecita.setLocation(derecha, izquierda);
-            
+        if (evt.getKeyChar() == 'a' || evt.getKeyChar() == 'A' || evt.getExtendedKeyCode() == KeyEvent.VK_LEFT){
+            if(x_nav>0){
+                x_nav -= 60;
+                navecita.setLocation(x_nav, y_nav);  
+            }
         }
         
-        if (evt.getKeyChar() == 'a' || evt.getKeyChar() == 'A'){
-            x -= 8;
-            lacercito.setLocation(derecha, izquierda);
-            
+        if (evt.getKeyChar() == 'd' || evt.getKeyChar() == 'D' || evt.getExtendedKeyCode() == KeyEvent.VK_RIGHT){
+            if(x_nav<600){
+                x_nav += 60;
+                navecita.setLocation(x_nav, y_nav);
+            }
         }
         
-        if (evt.getKeyChar() == 'd' || evt.getKeyChar() == 'D'){
-            x += 8;
-            lacercito.setLocation(derecha, izquierda);
-            
-        }
-        
-        if (evt.getKeyChar() == 'w' || evt.getKeyChar() == 'W'){
-            y -= 200;
-            lacercito.setLocation(x, y);
-            
-        }
-        
-        if (evt.getKeyChar() == 's' || evt.getKeyChar() == 'S'){
-            y += 200;
-            lacercito.setLocation(x, y);
-            
-        }
-        
-        if (evt.getKeyChar() == 'd' || evt.getKeyChar() == 'D'){
-            derecha += 8;
-            navecita.setLocation(derecha, izquierda);
-           
-        }
-        
-        if (evt.getExtendedKeyCode() == KeyEvent.VK_LEFT){
-            derecha -= 8;
-            navecita.setLocation(derecha, izquierda); 
-        }
-        
-        if (evt.getExtendedKeyCode() == KeyEvent.VK_LEFT){
-            x -= 8;
-            lacercito.setLocation(derecha, izquierda); 
-        }
-        
-        if (evt.getExtendedKeyCode() == KeyEvent.VK_RIGHT){
-            derecha += 8;
-            navecita.setLocation(derecha, izquierda);  
-        }
-        
-        if (evt.getExtendedKeyCode() == KeyEvent.VK_RIGHT){
-            x += 8;
-            lacercito.setLocation(derecha, izquierda);  
-        }
+        if(evt.getKeyChar() == 'w' || evt.getKeyChar() == 'W' || evt.getExtendedKeyCode() == KeyEvent.VK_UP){
 
-        
-        if (evt.getExtendedKeyCode() == KeyEvent.VK_UP){
-            y -= 200;
-            lacercito.setLocation(x, y);  
+            JLabel laserxd = new JLabel();
+            laserxd.setLocation(navecita.getX()+50, navecita.getY()+40);
+            laserxd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lasers/laserBlue16.png")));
+            laserxd.setSize(20, 60);
+            jPanel1.add(laserxd, 1);
+            jPanel1.validate();
+            Timer time = new Timer();
+            TimerTask task = new TimerTask(){
+                int y_laser = laserxd.getY();
+                int x_laser = laserxd.getX();
+                @Override
+                public void run(){
+                    if (y_laser > -60){
+                        y_laser = y_laser - 10;
+                        laserxd.setLocation(x_laser, y_laser);
+                    }  else{
+                        time.cancel();
+                        jPanel1.remove(laserxd);
+                    }
+                           
+                }
+            };
+            time.schedule(task, 0, 40);
         }
         
-        if (evt.getExtendedKeyCode() == KeyEvent.VK_DOWN){
-            y += 200;
-            lacercito.setLocation(x, y);  
-        }
-
-
-        
-
-// TODO add your handling code here:
     }//GEN-LAST:event_formKeyPressed
 
     /**
@@ -205,8 +171,7 @@ public class Facil extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel JLabel;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JLabel lacercito;
-    private javax.swing.JLabel laser;
     private javax.swing.JLabel navecita;
     // End of variables declaration//GEN-END:variables
+
 }
