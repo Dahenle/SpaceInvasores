@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package spaceinvaders;
 
 import java.awt.event.KeyEvent;
@@ -11,14 +7,11 @@ import java.util.TimerTask;
 import javax.swing.JLabel;
 
 
-/**
- *
- * @author nataliamartinezdiaz
- */
 public class Facil extends javax.swing.JFrame {
 
-    String navecita1,nombre;
+    String navecita1,nombre, colorlaser;
     Timer timer;
+    JLabel marciano[] = new JLabel[19];
 
     public Facil(String navecita1,String nombre) {
         initComponents();
@@ -27,21 +20,81 @@ public class Facil extends javax.swing.JFrame {
         switch (navecita1){
             case "roja":
                 navecita.setIcon(new javax.swing.ImageIcon(getClass().getResource("/naves/playerShip2_red.png")));
+                colorlaser = "/lasers/laserRed01.png";
             break;
             
             case "azul":
                 navecita.setIcon(new javax.swing.ImageIcon(getClass().getResource("/naves/playerShip2_blue.png")));
+                colorlaser = "/lasers/laserBlue16.png";
                 break;
      
             case "verde":
                 navecita.setIcon(new javax.swing.ImageIcon(getClass().getResource("/naves/playerShip2_green.png")));
+                colorlaser = "/lasers/laserGreen11.png";
                 break;
             case "naranja":
                 navecita.setIcon(new javax.swing.ImageIcon(getClass().getResource("/naves/playerShip2_orange.png")));
+                colorlaser = "/lasers/fire06.png";
                 break;       
         }
-        
-    }
+        int y = 0, l = 0;
+        for (int i = 1; i <= 2; i++) {
+            int x = 60; 
+            for (int j = 1; j <= 9; j++) {
+                l = l+1;
+                marciano[l] = new JLabel();
+                marciano[l].setSize(120, 150);
+                marciano[l].setIcon(new javax.swing.ImageIcon(getClass().getResource("/naves/playerShip2_orange.png")));
+                marciano[l].setLocation(x, y);
+                jPanel1.add(marciano[l], 1);
+                jPanel1.validate();
+                x = x+60;  
+            }
+            y = y+60;
+        }
+        Timer movimiento = new Timer();
+        TimerTask mov = new TimerTask(){
+            JLabel marcianos;
+            int y_marciano;
+            int x_marciano;
+            int tod;
+            @Override
+            public void run(){
+                for (int i = 1; i <= 18; i++){
+                    JLabel marcianos = marciano[i];
+                    x_marciano = marcianos.getX();
+                    y_marciano = marcianos.getY();
+                    if (x_marciano == 0){
+                        tod = 1;
+                    }
+                    if (x_marciano == 600){
+                        tod = 0;
+                    }
+                    
+                }
+                if (tod == 0){
+                    for (int i = 1; i <= 18; i++){
+                    JLabel marcianos = marciano[i];
+                    x_marciano = marcianos.getX();
+                    y_marciano = marcianos.getY();
+                    x_marciano -=60;
+                    marcianos.setLocation(x_marciano, y_marciano); 
+                    }
+                }
+                if (tod == 1){
+                    for (int i = 1; i <= 18; i++){
+                    JLabel marcianos = marciano[i];
+                    x_marciano = marcianos.getX();
+                    y_marciano = marcianos.getY();
+                    x_marciano +=60;
+                    marcianos.setLocation(x_marciano, y_marciano); 
+                    }
+                }
+            }
+        };
+        movimiento.schedule(mov, 1000, 1000);       
+}
+            
 
     private Facil() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -108,7 +161,7 @@ public class Facil extends javax.swing.JFrame {
 
             JLabel laserxd = new JLabel();
             laserxd.setLocation(navecita.getX()+50, navecita.getY()+40);
-            laserxd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lasers/laserBlue16.png")));
+            laserxd.setIcon(new javax.swing.ImageIcon(getClass().getResource(colorlaser)));
             laserxd.setSize(20, 60);
             jPanel1.add(laserxd, 1);
             jPanel1.validate();
