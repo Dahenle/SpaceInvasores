@@ -12,6 +12,7 @@ public class Test extends javax.swing.JFrame {
         this.nombre = nombre;
         this.nave = nave;
         this.Nombre.setText(nombre);
+        System.out.println(nombre);
         
         //condicional nave
         if (nave.matches("roja")==true){
