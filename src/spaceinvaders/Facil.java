@@ -129,10 +129,10 @@ public class Facil extends javax.swing.JFrame {
         JLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fondos/facil1.gif"))); // NOI18N
         JLabel.setPreferredSize(new java.awt.Dimension(710, 500));
         jPanel1.add(JLabel);
-        JLabel.setBounds(0, 0, 710, 500);
+        JLabel.setBounds(0, 0, 750, 520);
 
         getContentPane().add(jPanel1);
-        jPanel1.setBounds(0, 0, 710, 500);
+        jPanel1.setBounds(0, 0, 740, 520);
 
         setSize(new java.awt.Dimension(734, 547));
         setLocationRelativeTo(null);
