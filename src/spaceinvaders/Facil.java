@@ -39,12 +39,17 @@ public class Facil extends javax.swing.JFrame {
         }
         int y = 0, l = 0;
         for (int i = 1; i <= 2; i++) {
-            int x = 60; 
+            int x = 0; 
             for (int j = 1; j <= 9; j++) {
                 l = l+1;
                 marciano[l] = new JLabel();
-                marciano[l].setSize(120, 150);
-                marciano[l].setIcon(new javax.swing.ImageIcon(getClass().getResource("/naves/playerShip2_orange.png")));
+                marciano[l].setSize(60, 40);
+                if (l>=1 && l<=9){
+                   marciano[l].setIcon(new javax.swing.ImageIcon(getClass().getResource("/alien/alien1.png"))); 
+                }else{
+                   marciano[l].setIcon(new javax.swing.ImageIcon(getClass().getResource("/alien/alien2.png"))); 
+                }
+                
                 marciano[l].setLocation(x, y);
                 jPanel1.add(marciano[l], 1);
                 jPanel1.validate();
@@ -58,6 +63,7 @@ public class Facil extends javax.swing.JFrame {
             int y_marciano;
             int x_marciano;
             int tod;
+            int j=1;
             @Override
             public void run(){
                 for (int i = 1; i <= 18; i++){
@@ -74,21 +80,47 @@ public class Facil extends javax.swing.JFrame {
                 }
                 if (tod == 0){
                     for (int i = 1; i <= 18; i++){
-                    JLabel marcianos = marciano[i];
-                    x_marciano = marcianos.getX();
-                    y_marciano = marcianos.getY();
-                    x_marciano -=60;
-                    marcianos.setLocation(x_marciano, y_marciano); 
+                        JLabel marcianos = marciano[i];
+                        if (j==0){
+                            x_marciano = marcianos.getX();
+                            y_marciano = marcianos.getY();
+                            x_marciano -=40;
+                            marcianos.setLocation(x_marciano, y_marciano);
+                        }else{
+                            x_marciano = marcianos.getX();
+                            y_marciano = marcianos.getY();
+                            y_marciano +=30;
+                            marcianos.setLocation(x_marciano, y_marciano);
+                        }
+                        if (i==18){
+                            j=0;
+                        }
+                        
                     }
+
                 }
+
                 if (tod == 1){
                     for (int i = 1; i <= 18; i++){
-                    JLabel marcianos = marciano[i];
-                    x_marciano = marcianos.getX();
-                    y_marciano = marcianos.getY();
-                    x_marciano +=60;
-                    marcianos.setLocation(x_marciano, y_marciano); 
-                    }
+                        JLabel marcianos = marciano[i];
+                        if ((j>0)&&(j<4)){
+                           x_marciano = marcianos.getX();
+                           y_marciano = marcianos.getY();
+                           x_marciano +=40;
+                           marcianos.setLocation(x_marciano, y_marciano);
+                           if (i==18){
+                               j=j+1;
+                           }
+                        }else{
+                            x_marciano = marcianos.getX();
+                            y_marciano = marcianos.getY();
+                            y_marciano +=30;
+                            marcianos.setLocation(x_marciano, y_marciano);
+                        }
+                        if (i==18){
+                            j=1;
+                        }
+                    } 
                 }
             }
         };

@@ -1,25 +1,13 @@
 package spaceinvaders;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
-import sun.audio.AudioPlayer;
-import sun.audio.AudioStream;
+
 
 public class Nombre extends javax.swing.JFrame {
 
-    InputStream music;
-    AudioStream audios;
 
     public Nombre(){
         initComponents();
-        try {
-            music = new FileInputStream(new File("src\\sonidos\\song.wav"));
-            audios = new AudioStream(music);
-            playMusic(audios);
-        }catch (Exception e) {
-            System.out.println("Error");
-        }
+
     }
 
     @SuppressWarnings("unchecked")
@@ -80,7 +68,6 @@ public class Nombre extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        stopMusic(audios);
         this.dispose();
         Nave select = new Nave(this.jTextField1.getText());
         select.setResizable(false);
@@ -101,11 +88,5 @@ public class Nombre extends javax.swing.JFrame {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public static void playMusic(AudioStream audios){
-        AudioPlayer.player.start(audios);
-    }
 
-    public static void stopMusic(AudioStream audios) {
-        AudioPlayer.player.stop(audios);
-    }
 }
