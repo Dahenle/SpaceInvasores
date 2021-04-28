@@ -17,6 +17,7 @@ public class Facil extends javax.swing.JFrame {
         initComponents();
         this.navecita1=navecita1;
         this.nombre=nombre;
+
         switch (navecita1){
             case "roja":
                 navecita.setIcon(new javax.swing.ImageIcon(getClass().getResource("/naves/playerShip2_red.png")));
@@ -37,6 +38,7 @@ public class Facil extends javax.swing.JFrame {
                 colorlaser = "/lasers/fire06.png";
                 break;       
         }
+
         int y = 0, l = 0;
         for (int i = 1; i <= 2; i++) {
             int x = 0; 
@@ -47,7 +49,7 @@ public class Facil extends javax.swing.JFrame {
                 if (l>=1 && l<=9){
                    marciano[l].setIcon(new javax.swing.ImageIcon(getClass().getResource("/alien/alien1.png"))); 
                 }else{
-                   marciano[l].setIcon(new javax.swing.ImageIcon(getClass().getResource("/alien/alien2.png"))); 
+                   marciano[l].setIcon(new javax.swing.ImageIcon(getClass().getResource("/alien/alien1.png"))); 
                 }
                 
                 marciano[l].setLocation(x, y);
@@ -55,7 +57,7 @@ public class Facil extends javax.swing.JFrame {
                 jPanel1.validate();
                 x = x+60;  
             }
-            y = y+60;
+            y = y+35;
         }
         Timer movimiento = new Timer();
         TimerTask mov = new TimerTask(){
@@ -84,13 +86,14 @@ public class Facil extends javax.swing.JFrame {
                         if (j==0){
                             x_marciano = marcianos.getX();
                             y_marciano = marcianos.getY();
-                            x_marciano -=40;
+                            x_marciano -=45;
                             marcianos.setLocation(x_marciano, y_marciano);
                         }else{
                             x_marciano = marcianos.getX();
                             y_marciano = marcianos.getY();
                             y_marciano +=30;
                             marcianos.setLocation(x_marciano, y_marciano);
+                            marciano[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/alien/alien2.png")));
                         }
                         if (i==18){
                             j=0;
@@ -106,7 +109,7 @@ public class Facil extends javax.swing.JFrame {
                         if ((j>0)&&(j<4)){
                            x_marciano = marcianos.getX();
                            y_marciano = marcianos.getY();
-                           x_marciano +=40;
+                           x_marciano +=45;
                            marcianos.setLocation(x_marciano, y_marciano);
                            if (i==18){
                                j=j+1;
@@ -116,6 +119,7 @@ public class Facil extends javax.swing.JFrame {
                             y_marciano = marcianos.getY();
                             y_marciano +=30;
                             marcianos.setLocation(x_marciano, y_marciano);
+                            marciano[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/alien/alien1.png")));
                         }
                         if (i==18){
                             j=1;
