@@ -45,7 +45,7 @@ public class Facil extends javax.swing.JFrame {
             for (int j = 1; j <= 9; j++) {
                 l = l+1;
                 marciano[l] = new JLabel();
-                marciano[l].setSize(60, 40);
+                marciano[l].setSize(120, 130);
                 if (l>=1 && l<=9){
                    marciano[l].setIcon(new javax.swing.ImageIcon(getClass().getResource("/alien/alien1.png"))); 
                 }else{
@@ -69,7 +69,7 @@ public class Facil extends javax.swing.JFrame {
             @Override
             public void run(){
                 for (int i = 1; i <= 18; i++){
-                    JLabel marcianos = marciano[i];
+                    marcianos = marciano[i];
                     x_marciano = marcianos.getX();
                     y_marciano = marcianos.getY();
                     if (x_marciano == 0){
@@ -82,7 +82,7 @@ public class Facil extends javax.swing.JFrame {
                 }
                 if (tod == 0){
                     for (int i = 1; i <= 18; i++){
-                        JLabel marcianos = marciano[i];
+                        marcianos = marciano[i];
                         if (j==0){
                             x_marciano = marcianos.getX();
                             y_marciano = marcianos.getY();
@@ -128,7 +128,7 @@ public class Facil extends javax.swing.JFrame {
                 }
             }
         };
-        movimiento.schedule(mov, 1000, 1000);       
+        movimiento.schedule(mov, 1000, 1000);                      
 }
             
 
@@ -218,8 +218,33 @@ public class Facil extends javax.swing.JFrame {
                 }
             };
             time.schedule(task, 0, 40);
-        }
-        
+            Timer posicion = new Timer();
+            TimerTask verificacion = new TimerTask(){
+                JLabel marcianos;
+                JLabel laser;
+                int x_laser;
+                int y_laser;
+                int x_marciano;
+                int y_marciano;
+                @Override
+                public void run(){
+                    for (int i = 1; i <= 18; i++) {
+                        marcianos = marciano[i];
+                        laser = laserxd;
+                        x_laser = laser.getX();
+                        y_laser = laser.getY();
+                        x_marciano = marcianos.getX();
+                        y_marciano = marcianos.getY();
+                        if(x_marciano == x_laser && y_marciano == y_laser){
+                            jPanel1.remove(marcianos);
+                            jPanel1.remove(laser);
+                        }
+                        
+                    }
+                }
+            };
+            posicion.schedule(verificacion, 0, 40);
+        }    
     }//GEN-LAST:event_formKeyPressed
 
     /**
