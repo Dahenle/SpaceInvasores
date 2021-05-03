@@ -3,7 +3,6 @@ package spaceinvaders;
 public class Test extends javax.swing.JFrame {
 
     String nombre,nave,navecita1;
-    
     public Test(String nombre, String nave) {
         initComponents();
         this.setVisible(true);
@@ -118,9 +117,9 @@ public class Test extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         this.dispose();
-        Facil facil = new Facil(navecita1,nombre);
+        Facil facil = new Facil(navecita1,nombre,73);
         facil.setResizable(false);
-        facil.setSize(716,500);
+        facil.setSize(715,520);
         facil.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -130,10 +129,10 @@ public class Test extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         this.dispose();
-        Dificil dificil = new Dificil();
-        dificil.setResizable(false);
-        dificil.setSize(650,490);
-        dificil.setVisible(true);
+        Facil facil = new Facil(navecita1,nombre,146);
+        facil.setResizable(false);
+        facil.setSize(730,520);
+        facil.setVisible(true);
         
     }//GEN-LAST:event_jButton2ActionPerformed
 
