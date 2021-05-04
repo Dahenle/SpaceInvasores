@@ -10,15 +10,34 @@ import javax.swing.JLabel;
 public class Facil extends javax.swing.JFrame {
 
     String navecita1,nombre, colorlaser;
-    int punt=0;
+    int punt=0,velocidad;
     String punto;
     Timer timer;
     JLabel marciano[] = new JLabel[19];
+    String nivel;
+    JLabel fondo;
+    
+    
 
-    public Facil(String navecita1,String nombre, int velocidad) {
+    public Facil(String navecita1,String nombre, int velocidad, String nivel) {
         initComponents();
         this.navecita1=navecita1;
         this.nombre=nombre;
+        this.velocidad =velocidad;
+        System.out.println(velocidad);
+        this.nivel=nivel;
+        
+        fondo = new JLabel();
+        fondo.setBounds(0,0,720,520);
+        if (nivel=="uno"){
+           fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fondos/facil1.gif")));
+        }else{
+           fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fondos/sun.gif")));
+           fondo.setBounds(0,0,720,520);
+        }
+        jPanel1.add(fondo);
+        
+        
 
         switch (navecita1){
             case "roja":
@@ -132,7 +151,7 @@ public class Facil extends javax.swing.JFrame {
                 }
             }
         };
-        movimiento.schedule(mov, 1000, 1000);                      
+        movimiento.schedule(mov, velocidad, velocidad);                      
 }
             
 
@@ -151,9 +170,10 @@ public class Facil extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         navecita = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
         puntos = new javax.swing.JLabel();
-        JLabel = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addKeyListener(new java.awt.event.KeyAdapter() {
@@ -163,25 +183,32 @@ public class Facil extends javax.swing.JFrame {
         });
         getContentPane().setLayout(null);
 
-        jPanel1.setBounds(new java.awt.Rectangle(0, 0, 715, 520));
+        jPanel1.setBackground(new java.awt.Color(102, 0, 0));
         jPanel1.setPreferredSize(new java.awt.Dimension(710, 500));
         jPanel1.setLayout(null);
         jPanel1.add(navecita);
         navecita.setBounds(300, 380, 120, 130);
 
-        jLabel1.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
-        jLabel1.setText("Puntos: ");
-        jPanel1.add(jLabel1);
-        jLabel1.setBounds(550, 10, 53, 30);
-
+        puntos.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
         puntos.setForeground(new java.awt.Color(255, 255, 255));
         jPanel1.add(puntos);
-        puntos.setBounds(610, 16, 70, 20);
+        puntos.setBounds(640, 10, 60, 30);
 
-        JLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fondos/facil1.gif"))); // NOI18N
-        JLabel.setPreferredSize(new java.awt.Dimension(710, 500));
-        jPanel1.add(JLabel);
-        JLabel.setBounds(0, 0, 730, 500);
+        jLabel2.setFont(new java.awt.Font("Copperplate", 1, 24)); // NOI18N
+        jLabel2.setText("Puntos: ");
+        jPanel1.add(jLabel2);
+        jLabel2.setBounds(540, 10, 110, 30);
+
+        jPanel3.setBackground(new java.awt.Color(153, 0, 153));
+        jPanel3.setLayout(null);
+
+        jLabel1.setFont(new java.awt.Font("Copperplate", 1, 24)); // NOI18N
+        jLabel1.setText("Vidas:");
+        jPanel3.add(jLabel1);
+        jLabel1.setBounds(10, 60, 80, 30);
+
+        jPanel1.add(jPanel3);
+        jPanel3.setBounds(530, 0, 190, 110);
 
         getContentPane().add(jPanel1);
         jPanel1.setBounds(0, 0, 920, 520);
@@ -240,35 +267,38 @@ public class Facil extends javax.swing.JFrame {
             TimerTask verificacion = new TimerTask(){
                 JLabel marcianos;
                 JLabel laser;
+                int invi[]=null;
                 int x_laser;
                 int y_laser;
                 int x_marciano;
                 int y_marciano;
                 boolean aliens[];
                 
+                
                
 
                 @Override
                 public void run(){
-                    int lim=18;
-                    int c=0;
-
-                    for (int i = 1; i <= lim; i++) {
+                    
+                    
+                    for (int i = 1; i <= 18; i++) {
                         marcianos = marciano[i];
                         laser = laserxd;
                         x_laser = laser.getX();
                         y_laser = laser.getY();
                         x_marciano = marcianos.getX();
                         y_marciano = marcianos.getY();
+                        
 
-                        if(x_marciano == x_laser && y_marciano == y_laser){
+                        if(x_marciano == x_laser && y_marciano == y_laser && marcianos.isVisible()==true){
                                 marciano[i].setIcon(null);
                                 jPanel1.remove(laser);
                                 jPanel1.remove(marcianos);
                                 punt=punt+10;
                                 punto = String.valueOf(punt);
                                 puntos.setText(punto);
-                                
+                                marcianos.setVisible(false);
+     
                         }
                     }
                 }
@@ -314,9 +344,10 @@ public class Facil extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel JLabel;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JLabel navecita;
     private javax.swing.JLabel puntos;
     // End of variables declaration//GEN-END:variables
