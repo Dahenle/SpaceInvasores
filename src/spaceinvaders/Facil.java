@@ -24,7 +24,6 @@ public class Facil extends javax.swing.JFrame {
         this.navecita1=navecita1;
         this.nombre=nombre;
         this.velocidad =velocidad;
-        System.out.println(velocidad);
         this.nivel=nivel;
         
         fondo = new JLabel();
@@ -133,7 +132,6 @@ public class Facil extends javax.swing.JFrame {
                            x_marciano +=50;
                            marcianos.setLocation(x_marciano, y_marciano);
                            if (i==18){
-                               System.out.println(x_marciano);
                                j=j+1;
                            }
                         }else{
