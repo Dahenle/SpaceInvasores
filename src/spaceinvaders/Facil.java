@@ -10,22 +10,27 @@ import javax.swing.JLabel;
 public class Facil extends javax.swing.JFrame {
 
     String navecita1,nombre, colorlaser;
-    int punt=0,velocidad;
+    int punt,velocidad;
     String punto;
     Timer timer;
-    JLabel marciano[] = new JLabel[19];
+    JLabel marciano[] = new JLabel[28];
     String nivel;
     JLabel fondo;
-    
+    int filas;
+    int can_marcianos = 0;
+    int mar_restantes = 100;
     
 
-    public Facil(String navecita1,String nombre, int velocidad, String nivel) {
+    public Facil(String navecita1, String nombre, int velocidad, String nivel, int punt, int filas) {
         initComponents();
         this.navecita1=navecita1;
         this.nombre=nombre;
         this.velocidad =velocidad;
         this.nivel=nivel;
+        this.filas = filas;
+        this.punt = punt;
         
+        puntos.setText(String.valueOf(punt));
         fondo = new JLabel();
         fondo.setBounds(0,0,720,520);
         if (nivel=="uno"){
@@ -59,26 +64,27 @@ public class Facil extends javax.swing.JFrame {
                 break;       
         }
 
-        int y = 0, l = 0;
-        for (int i = 1; i <= 2; i++) {
+        int y = 0;
+        for (int i = 1; i <= filas; i++) {
             int x = 0; 
             for (int j = 1; j <= 9; j++) {
-                l = l+1;
-                marciano[l] = new JLabel();
-                marciano[l].setSize(120, 130);
-                if (l>=1 && l<=9){
-                   marciano[l].setIcon(new javax.swing.ImageIcon(getClass().getResource("/alien/alien1.png"))); 
+                can_marcianos += 1;
+                marciano[can_marcianos] = new JLabel();
+                marciano[can_marcianos].setSize(120, 130);
+                if (can_marcianos>=1 && can_marcianos<=9){
+                   marciano[can_marcianos].setIcon(new javax.swing.ImageIcon(getClass().getResource("/alien/alien1.png"))); 
                 }else{
-                   marciano[l].setIcon(new javax.swing.ImageIcon(getClass().getResource("/alien/alien1.png"))); 
+                   marciano[can_marcianos].setIcon(new javax.swing.ImageIcon(getClass().getResource("/alien/alien1.png"))); 
                 }
                 
-                marciano[l].setLocation(x, y);
-                jPanel1.add(marciano[l], 1);
+                marciano[can_marcianos].setLocation(x, y);
+                jPanel1.add(marciano[can_marcianos], 1);
                 jPanel1.validate();
                 x = x+50;  
             }
             y = y+40;
         }
+        mar_restantes = can_marcianos;
         Timer movimiento = new Timer();
         TimerTask mov = new TimerTask(){
             JLabel marcianos;
@@ -88,7 +94,7 @@ public class Facil extends javax.swing.JFrame {
             int j=1;
             @Override
             public void run(){
-                for (int i = 1; i <= 18; i++){
+                for (int i = 1; i <= can_marcianos; i++){
                     marcianos = marciano[i];
                     x_marciano = marcianos.getX();
                     y_marciano = marcianos.getY();
@@ -101,7 +107,7 @@ public class Facil extends javax.swing.JFrame {
                     
                 }
                 if (tod == 0){
-                    for (int i = 1; i <= 18; i++){
+                    for (int i = 1; i <= can_marcianos; i++){
                         marcianos = marciano[i];
                         if (j==0){
                             x_marciano = marcianos.getX();
@@ -111,11 +117,11 @@ public class Facil extends javax.swing.JFrame {
                         }else{
                             x_marciano = marcianos.getX();
                             y_marciano = marcianos.getY();
-                            y_marciano +=30;
+                            y_marciano +=40;
                             marcianos.setLocation(x_marciano, y_marciano);
                             marciano[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/alien/alien2.png")));
                         }
-                        if (i==18){
+                        if (i==can_marcianos){
                             j=0;
                         }
                         
@@ -124,28 +130,37 @@ public class Facil extends javax.swing.JFrame {
                 }
 
                 if (tod == 1){
-                    for (int i = 1; i <= 18; i++){
-                        JLabel marcianos = marciano[i];
+                    for (int i = 1; i <= can_marcianos; i++){
+                        marcianos = marciano[i];
                         if ((j>0)&&(j<6)){
                            x_marciano = marcianos.getX();
                            y_marciano = marcianos.getY();
                            x_marciano +=50;
                            marcianos.setLocation(x_marciano, y_marciano);
-                           if (i==18){
+                           if (i==can_marcianos){
                                j=j+1;
                            }
                         }else{
                             x_marciano = marcianos.getX();
                             y_marciano = marcianos.getY();
-                            y_marciano +=30;
+                            y_marciano +=40;
                             marcianos.setLocation(x_marciano, y_marciano);
                             marciano[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/alien/alien1.png")));
-                            if (i==18){
+                            if (i==can_marcianos){
                                j=1;
                             }
                         }
                         
                     } 
+                }
+                for (int i = 1; i <= can_marcianos; i++) {
+                    marcianos = marciano[i];
+                    y_marciano = marcianos.getY();
+                    if (y_marciano == 360) {
+                        marcianos.setIcon(null);
+                        jPanel1.remove(marcianos);
+                        mar_restantes -= 1;
+                    }
                 }
             }
         };
@@ -189,6 +204,7 @@ public class Facil extends javax.swing.JFrame {
 
         puntos.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
         puntos.setForeground(new java.awt.Color(255, 255, 255));
+        puntos.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jPanel1.add(puntos);
         puntos.setBounds(640, 10, 60, 30);
 
@@ -244,8 +260,12 @@ public class Facil extends javax.swing.JFrame {
             jPanel1.validate();
             Timer time = new Timer();
             TimerTask task = new TimerTask(){
+                JLabel marcianos;
                 int y_laser = laserxd.getY();
                 int x_laser = laserxd.getX();
+                int x_marciano;
+                int y_marciano;
+                int can_marciano;
                 @Override
                 public void run(){
                     if (y_laser > -60){
@@ -254,55 +274,38 @@ public class Facil extends javax.swing.JFrame {
                     }else{
                         jPanel1.remove(laserxd);
                         time.cancel();
-
                     }
-                           
-                }
-            };
-            
-            time.schedule(task, 0, 40);
-            Timer posicion = new Timer();
-            TimerTask verificacion = new TimerTask(){
-                JLabel marcianos;
-                JLabel laser;
-                int invi[]=null;
-                int x_laser;
-                int y_laser;
-                int x_marciano;
-                int y_marciano;
-                boolean aliens[];
-                
-                
-               
-
-                @Override
-                public void run(){
-                    
-                    
-                    for (int i = 1; i <= 18; i++) {
+                    for (int i = 1; i <= can_marcianos; i++) {
                         marcianos = marciano[i];
-                        laser = laserxd;
-                        x_laser = laser.getX();
-                        y_laser = laser.getY();
+                        x_laser = laserxd.getX();
+                        y_laser = laserxd.getY();
                         x_marciano = marcianos.getX();
                         y_marciano = marcianos.getY();
                         
-
                         if(x_marciano == x_laser && y_marciano == y_laser && marcianos.isVisible()==true){
-                                marciano[i].setIcon(null);
-                                jPanel1.remove(laser);
+                                mar_restantes -= 1;
+                                marcianos.setIcon(null);
+                                jPanel1.remove(laserxd);
                                 jPanel1.remove(marcianos);
                                 punt=punt+10;
                                 punto = String.valueOf(punt);
                                 puntos.setText(punto);
                                 marcianos.setVisible(false);
-     
+                                time.cancel();
                         }
                     }
+                        if (mar_restantes == 0) {
+                        Facil facil = new Facil(navecita1,nombre,velocidad-300,nivel, punt, filas);
+                        facil.setResizable(false);
+                        facil.setSize(715,520);
+                        facil.setVisible(true);
+                        time.cancel();
+                }       
                 }
             };
             
-            posicion.schedule(verificacion, 0, 40);
+            time.schedule(task, 0, 40);
+
         }    
     }//GEN-LAST:event_formKeyPressed
 
