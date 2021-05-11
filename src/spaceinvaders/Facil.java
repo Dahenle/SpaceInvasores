@@ -5,6 +5,8 @@ import java.awt.event.KeyEvent;
 import java.util.Timer;
 import java.util.TimerTask;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 
 
 public class Facil extends javax.swing.JFrame {
@@ -13,16 +15,17 @@ public class Facil extends javax.swing.JFrame {
     int punt,velocidad;
     String punto;
     Timer timer;
-    JLabel marciano[] = new JLabel[28];
+    JLabel marciano[] = new JLabel[40];
     String nivel;
     JLabel fondo;
     int filas;
     int can_marcianos = 0;
     int mar_restantes = 100;
     int vida;
+    int puntajefinal1,puntajefinal2;
     
 
-    public Facil(String navecita1, String nombre, int velocidad, String nivel, int punt, int filas, int vida) {
+    public Facil(String navecita1, String nombre, int velocidad, String nivel, int punt, int filas, int vida,int puntajefinal1,int puntajefinal2) {
         initComponents();
         this.navecita1=navecita1;
         this.nombre=nombre;
@@ -31,7 +34,10 @@ public class Facil extends javax.swing.JFrame {
         this.filas = filas;
         this.punt = punt;
         this.vida=vida;
-        
+        this.puntajefinal1=puntajefinal1;
+        this.puntajefinal2=puntajefinal2;
+        contador.setText(String.valueOf(velocidad));
+        System.out.println(nivel);
         switch (vida){
             case 1:
                vidas.setText("♥");
@@ -51,7 +57,8 @@ public class Facil extends javax.swing.JFrame {
         
         if (nivel=="uno"){
            fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fondos/facil1.gif")));
-        }else{
+        }
+        if (nivel=="dos"){
            fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fondos/sun.gif")));
            fondo.setBounds(0,0,720,520);
         }
@@ -109,9 +116,12 @@ public class Facil extends javax.swing.JFrame {
             int tod;
             int j=1;
             int vida = vidas.getText().length();
+            int contador1=Integer.parseInt(contador.getText());
+            
 
             @Override
             public void run(){
+                
                 for (int i = 1; i <= can_marcianos; i++){
                     marcianos = marciano[i];
                     x_marciano = marcianos.getX();
@@ -124,6 +134,7 @@ public class Facil extends javax.swing.JFrame {
                     }
                     
                 }
+                
                 if (tod == 0){
                     for (int i = 1; i <= can_marcianos; i++){
                         marcianos = marciano[i];
@@ -144,9 +155,8 @@ public class Facil extends javax.swing.JFrame {
                         }
                         
                     }
-                    
-
                 }
+                
 
                 if (tod == 1){
                     for (int i = 1; i <= can_marcianos; i++){
@@ -191,9 +201,13 @@ public class Facil extends javax.swing.JFrame {
                             case 2:
                                 vidas.setText("♥♥");
                                 break;
+                            case 3:
+                                vidas.setText("♥♥♥");
+                                break;
                             
                         }
                         mar_restantes -= 1;
+                        
                         if (mar_restantes == 0 && vida>0){
                             mensaje.setText("Toque cualquier tecla para continuar");
                             movimiento.cancel();
@@ -202,9 +216,12 @@ public class Facil extends javax.swing.JFrame {
                         jPanel1.remove(marcianos);
                         marcianos.setVisible(false);
                         
+                        
                     }
                     
+                    
                 }
+                
                 
                  
                    
@@ -236,8 +253,10 @@ public class Facil extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         vidas = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         mensaje = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        contador = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addKeyListener(new java.awt.event.KeyAdapter() {
@@ -273,10 +292,10 @@ public class Facil extends javax.swing.JFrame {
         jPanel3.add(vidas);
         vidas.setBounds(90, 60, 80, 30);
 
-        jLabel4.setFont(new java.awt.Font("Copperplate", 1, 24)); // NOI18N
-        jLabel4.setText("Vidas:");
-        jPanel3.add(jLabel4);
-        jLabel4.setBounds(10, 60, 80, 30);
+        jLabel5.setFont(new java.awt.Font("Copperplate", 1, 24)); // NOI18N
+        jLabel5.setText("Vidas:");
+        jPanel3.add(jLabel5);
+        jLabel5.setBounds(10, 60, 80, 30);
 
         jPanel1.add(jPanel3);
         jPanel3.setBounds(530, 0, 190, 110);
@@ -285,6 +304,12 @@ public class Facil extends javax.swing.JFrame {
         mensaje.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jPanel1.add(mensaje);
         mensaje.setBounds(0, 210, 720, 80);
+
+        contador.setFont(new java.awt.Font("Copperplate", 1, 24)); // NOI18N
+        jPanel2.add(contador);
+
+        jPanel1.add(jPanel2);
+        jPanel2.setBounds(0, 0, 80, 40);
 
         getContentPane().add(jPanel1);
         jPanel1.setBounds(0, 0, 720, 520);
@@ -299,25 +324,45 @@ public class Facil extends javax.swing.JFrame {
         vida=vidas.getText().length();
         if (mar_restantes <= 0 && vida > 0) {
            this.dispose();
-           if (velocidad-200>0){
-               velocidad=velocidad-200;
-               Facil facil = new Facil(navecita1,nombre,velocidad,nivel, punt, filas,vida);
-               facil.setResizable(false);
-               facil.setSize(715,520);
-               facil.setVisible(true);
-           }else{
-               mensaje.setText("Has pasado el nivel felicitaciones!");
-           }
-           
+            if (velocidad>200){
+               velocidad-=100;
+               if (velocidad!=200){
+                   Facil facil = new Facil(navecita1,nombre,velocidad,nivel, punt, filas,vida,puntajefinal1,puntajefinal2);
+                   facil.setResizable(false);
+                   facil.setSize(715,520);
+                   facil.setVisible(true);
+                   contador.setText(String.valueOf(velocidad));
+               }
+                
+            }
+        }
+        if (velocidad==200 && vida>0){
+                System.out.println("hola");
+                System.out.println("hola");
+                JOptionPane.showMessageDialog(null,"Has pasado el nivel, felicitaciones!");
+                this.dispose();
+                Test test = new Test(nombre, navecita1,puntajefinal1,puntajefinal2);
+                test.setVisible(true);
+                test.setResizable(false);
+                test.setSize(590,400);
         }
         
+        
+        
         if (vidas.getText()==""){
+            if (nivel.equals("uno")==true){
+                JOptionPane.showMessageDialog(null, nombre+" tu record en este nivel es: "+puntajefinal1);
+            }
+            if (nivel.equals("dos")==true){
+                JOptionPane.showMessageDialog(null, nombre+" tu record en este nivel es: "+puntajefinal2); 
+            }
             this.dispose();
-            Test test = new Test(nombre, navecita1);
+            Test test = new Test(nombre, navecita1,puntajefinal1,puntajefinal2);
             test.setVisible(true);
             test.setResizable(false);
             test.setSize(590,400);
         }
+        
         
         
         
@@ -374,6 +419,12 @@ public class Facil extends javax.swing.JFrame {
                                 jPanel1.remove(laserxd);
                                 jPanel1.remove(marcianos);
                                 punt=punt+10;
+                                if (nivel=="uno"&&puntajefinal1<punt){
+                                    puntajefinal1=punt;
+                                }
+                                if (nivel=="dos"&&puntajefinal2<punt){
+                                    puntajefinal2=punt;
+                                }
                                 punto = String.valueOf(punt);
                                 puntos.setText(punto);
                                 marcianos.setVisible(false);
@@ -386,7 +437,7 @@ public class Facil extends javax.swing.JFrame {
                         if (vidas.getText()==""){
                             time.cancel();
                         }
-                        
+
                     }
                      
                     
@@ -436,9 +487,11 @@ public class Facil extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel contador;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JLabel mensaje;
     private javax.swing.JLabel navecita;
