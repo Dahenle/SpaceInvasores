@@ -117,7 +117,7 @@ public class Test extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         this.dispose();
-        Facil facil = new Facil(navecita1,nombre,1000,"uno", 0, 2);
+        Facil facil = new Facil(navecita1,nombre,1000,"uno", 0, 2, 3);
         facil.setResizable(false);
         facil.setSize(715,520);
         facil.setVisible(true);
@@ -129,7 +129,7 @@ public class Test extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         this.dispose();
-        Facil facil = new Facil(navecita1,nombre, 600,"dos", 0, 3);
+        Facil facil = new Facil(navecita1,nombre, 600,"dos", 0, 3, 1);
         facil.setResizable(false);
         facil.setSize(715,520);
         facil.setVisible(true);

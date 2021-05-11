@@ -22,7 +22,7 @@ public class Facil extends javax.swing.JFrame {
     int vida;
     
 
-    public Facil(String navecita1, String nombre, int velocidad, String nivel, int punt, int filas,int vida) {
+    public Facil(String navecita1, String nombre, int velocidad, String nivel, int punt, int filas, int vida) {
         initComponents();
         this.navecita1=navecita1;
         this.nombre=nombre;
@@ -108,7 +108,7 @@ public class Facil extends javax.swing.JFrame {
             int x_marciano;
             int tod;
             int j=1;
-            int vida=3;
+            int vida = vidas.getText().length();
 
             @Override
             public void run(){
@@ -172,13 +172,13 @@ public class Facil extends javax.swing.JFrame {
                         
                     } 
                 }
-                int conta2=0;
                 for (int i = 1; i <= can_marcianos; i++) {
                     marcianos = marciano[i];
                     y_marciano = marcianos.getY();
                     x_marciano = marcianos.getX();
-                    if (y_marciano == 360 && x_marciano==navecita.getX() && marcianos.isVisible()==true){
-                        vida-=1;
+                    if (y_marciano == 360 && marcianos.isVisible()==true){
+                        vida = vida-1;
+                        System.out.println(vida);
                         switch (vida){
                             case 0:
                                 vidas.setText("");
@@ -191,20 +191,15 @@ public class Facil extends javax.swing.JFrame {
                             case 2:
                                 vidas.setText("♥♥");
                                 break;
-                            case 3:
-                                vidas.setText("♥♥♥");
-                                break;
                             
                         }
                         mar_restantes -= 1;
-                        if (mar_restantes == 0){
+                        if (mar_restantes == 0 && vida>0){
                             mensaje.setText("Toque cualquier tecla para continuar");
                             movimiento.cancel();
                         }
                         marcianos.setIcon(null);
                         jPanel1.remove(marcianos);
-                        System.out.println(mar_restantes);
-                        conta2=1;
                         marcianos.setVisible(false);
                         
                     }
@@ -274,6 +269,7 @@ public class Facil extends javax.swing.JFrame {
 
         vidas.setFont(new java.awt.Font("Copperplate", 1, 24)); // NOI18N
         vidas.setForeground(new java.awt.Color(255, 0, 0));
+        vidas.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jPanel3.add(vidas);
         vidas.setBounds(90, 60, 80, 30);
 
@@ -286,6 +282,7 @@ public class Facil extends javax.swing.JFrame {
         jPanel3.setBounds(530, 0, 190, 110);
 
         mensaje.setFont(new java.awt.Font("Copperplate", 1, 24)); // NOI18N
+        mensaje.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jPanel1.add(mensaje);
         mensaje.setBounds(0, 210, 720, 80);
 
@@ -299,9 +296,9 @@ public class Facil extends javax.swing.JFrame {
     private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
         int x_nav = navecita.getX();
         int y_nav = navecita.getY();
-        if (mar_restantes <= 0) {
+        vida=vidas.getText().length();
+        if (mar_restantes <= 0 && vida > 0) {
            this.dispose();
-           vida=vidas.getText().length();
            if (velocidad-200>0){
                velocidad=velocidad-200;
                Facil facil = new Facil(navecita1,nombre,velocidad,nivel, punt, filas,vida);
