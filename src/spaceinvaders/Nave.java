@@ -3,7 +3,7 @@ package spaceinvaders;
 public class Nave extends javax.swing.JFrame {
 
     String nombre;
-    
+    int puntajefinal1,puntajefinal2;
     public Nave(String nombre) {
        initComponents();
        this.nombre = nombre;
@@ -82,22 +82,22 @@ public class Nave extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void naveRojaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_naveRojaActionPerformed
-        Test test = new Test(nombre, "roja");
+        Test test = new Test(nombre, "roja",puntajefinal1,puntajefinal2);
         this.dispose();
     }//GEN-LAST:event_naveRojaActionPerformed
 
     private void naveAzulActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_naveAzulActionPerformed
-        Test test = new Test(nombre, "azul");
+        Test test = new Test(nombre, "azul",puntajefinal1,puntajefinal2);
         this.dispose();
     }//GEN-LAST:event_naveAzulActionPerformed
 
     private void naveVerdeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_naveVerdeActionPerformed
-        Test test = new Test(nombre, "verde");
+        Test test = new Test(nombre, "verde",puntajefinal1,puntajefinal2);
         this.dispose();
     }//GEN-LAST:event_naveVerdeActionPerformed
 
     private void naveNaranjeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_naveNaranjeActionPerformed
-        Test test = new Test(nombre, "naranja"); 
+        Test test = new Test(nombre, "naranja",puntajefinal1,puntajefinal2); 
         this.dispose();
     }//GEN-LAST:event_naveNaranjeActionPerformed
 

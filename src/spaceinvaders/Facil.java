@@ -192,7 +192,7 @@ public class Facil extends javax.swing.JFrame {
                         switch (vida){
                             case 0:
                                 vidas.setText("");
-                                mensaje.setText("Has perdido, pulsa cualquier tecla para regresar al inicio");
+                                mensaje.setText("Perdiste, pulsa cualquier tecla para regresar al inicio");
                                 movimiento.cancel();
                                 break;
                             case 1:
