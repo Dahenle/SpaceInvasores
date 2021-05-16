@@ -2,6 +2,7 @@
 package spaceinvaders;
 
 import java.awt.event.KeyEvent;
+import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 import javax.swing.JLabel;
@@ -12,6 +13,10 @@ import javax.swing.JOptionPane;
 public class Facil extends javax.swing.JFrame {
 
     String navecita1,nombre, colorlaser;
+    String [] aliencolor1 = {"Verde","Rojo","Morado","Rosado","Naranja","Azul"};
+    String aliencolor;
+    Random color = new Random();
+    int select;
     int punt,velocidad;
     String punto;
     Timer timer;
@@ -88,17 +93,17 @@ public class Facil extends javax.swing.JFrame {
           
         int y = 0;
         for (int i = 1; i <= filas; i++) {
+            select=color.nextInt(aliencolor1.length);
             int x = 0; 
             for (int j = 1; j <= 9; j++) {
                 can_marcianos += 1;
                 marciano[can_marcianos] = new JLabel();
                 marciano[can_marcianos].setSize(120, 130);
-                if (can_marcianos>=1 && can_marcianos<=9){
-                   marciano[can_marcianos].setIcon(new javax.swing.ImageIcon(getClass().getResource("/alien/alien1.png"))); 
+                if (i % 2 == 0){
+                   marciano[can_marcianos].setIcon(new javax.swing.ImageIcon(getClass().getResource("/alien/"+aliencolor1[select]+".png"))); 
                 }else{
-                   marciano[can_marcianos].setIcon(new javax.swing.ImageIcon(getClass().getResource("/alien/alien1.png"))); 
-                }
-                
+                   marciano[can_marcianos].setIcon(new javax.swing.ImageIcon(getClass().getResource("/alien/"+aliencolor1[select]+".png")));
+                } 
                 marciano[can_marcianos].setLocation(x, y);
                 jPanel1.add(marciano[can_marcianos], 1);
                 jPanel1.validate();
@@ -137,6 +142,9 @@ public class Facil extends javax.swing.JFrame {
                 
                 if (tod == 0){
                     for (int i = 1; i <= can_marcianos; i++){
+                        if (i % 9 - 1 == 0){
+                           select=color.nextInt(aliencolor1.length);
+                        }
                         marcianos = marciano[i];
                         if (j==0){
                             x_marciano = marcianos.getX();
@@ -148,7 +156,7 @@ public class Facil extends javax.swing.JFrame {
                             y_marciano = marcianos.getY();
                             y_marciano +=40;
                             marcianos.setLocation(x_marciano, y_marciano);
-                            marciano[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/alien/alien2.png")));
+                            marciano[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/alien/"+aliencolor1[select]+".png")));
                         }
                         if (i==can_marcianos){
                             j=0;
@@ -161,6 +169,9 @@ public class Facil extends javax.swing.JFrame {
                 if (tod == 1){
                     for (int i = 1; i <= can_marcianos; i++){
                         marcianos = marciano[i];
+                        if (i % 9 - 1 == 0){
+                               select=color.nextInt(aliencolor1.length);
+                        }
                         if (j>0){
                            x_marciano = marcianos.getX();
                            y_marciano = marcianos.getY();
@@ -174,7 +185,7 @@ public class Facil extends javax.swing.JFrame {
                             y_marciano = marcianos.getY();
                             y_marciano +=40;
                             marcianos.setLocation(x_marciano, y_marciano);
-                            marciano[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/alien/alien1.png")));
+                            marciano[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/alien/"+aliencolor1[select]+".png")));
                             if (i==can_marcianos){
                                j=1;
                             }
@@ -257,6 +268,7 @@ public class Facil extends javax.swing.JFrame {
         mensaje = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         contador = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addKeyListener(new java.awt.event.KeyAdapter() {
@@ -306,10 +318,33 @@ public class Facil extends javax.swing.JFrame {
         mensaje.setBounds(0, 210, 720, 80);
 
         contador.setFont(new java.awt.Font("Copperplate", 1, 24)); // NOI18N
-        jPanel2.add(contador);
+
+        jLabel3.setFont(new java.awt.Font("Copperplate", 1, 24)); // NOI18N
+        jLabel3.setText("Ronda");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(contador, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(contador, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(8, Short.MAX_VALUE))
+        );
 
         jPanel1.add(jPanel2);
-        jPanel2.setBounds(0, 0, 80, 40);
+        jPanel2.setBounds(0, 0, 140, 40);
 
         getContentPane().add(jPanel1);
         jPanel1.setBounds(0, 0, 720, 520);
@@ -489,6 +524,7 @@ public class Facil extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel contador;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
