@@ -28,9 +28,10 @@ public class Facil extends javax.swing.JFrame {
     int mar_restantes = 100;
     int vida;
     int puntajefinal1,puntajefinal2;
+    int ronda;
     
 
-    public Facil(String navecita1, String nombre, int velocidad, String nivel, int punt, int filas, int vida,int puntajefinal1,int puntajefinal2) {
+    public Facil(String navecita1, String nombre, int velocidad, String nivel, int punt, int filas, int vida,int puntajefinal1,int puntajefinal2, int ronda) {
         initComponents();
         this.navecita1=navecita1;
         this.nombre=nombre;
@@ -41,7 +42,8 @@ public class Facil extends javax.swing.JFrame {
         this.vida=vida;
         this.puntajefinal1=puntajefinal1;
         this.puntajefinal2=puntajefinal2;
-        contador.setText(String.valueOf(velocidad));
+        this.ronda = ronda;
+        contador.setText(String.valueOf(ronda));
         System.out.println(nivel);
         switch (vida){
             case 1:
@@ -359,27 +361,22 @@ public class Facil extends javax.swing.JFrame {
         vida=vidas.getText().length();
         if (mar_restantes <= 0 && vida > 0) {
            this.dispose();
-            if (velocidad>200){
+            if (ronda<3){
                velocidad-=100;
-               if (velocidad!=200){
-                   Facil facil = new Facil(navecita1,nombre,velocidad,nivel, punt, filas,vida,puntajefinal1,puntajefinal2);
-                   facil.setResizable(false);
-                   facil.setSize(715,520);
-                   facil.setVisible(true);
-                   contador.setText(String.valueOf(velocidad));
-               }
-                
+               Facil facil = new Facil(navecita1,nombre,velocidad,nivel, punt, filas,vida,puntajefinal1,puntajefinal2, ronda+1);
+               facil.setResizable(false);
+               facil.setSize(715,520);
+               facil.setVisible(true);
+               contador.setText(String.valueOf(ronda)); 
             }
-        }
-        if (velocidad==200 && vida>0){
-                System.out.println("hola");
-                System.out.println("hola");
+            if (ronda == 3) {
                 JOptionPane.showMessageDialog(null,"Has pasado el nivel, felicitaciones!");
                 this.dispose();
                 Test test = new Test(nombre, navecita1,puntajefinal1,puntajefinal2);
                 test.setVisible(true);
                 test.setResizable(false);
                 test.setSize(590,400);
+            }
         }
         
         
