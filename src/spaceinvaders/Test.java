@@ -90,17 +90,17 @@ public class Test extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButton2);
-        jButton2.setBounds(310, 190, 250, 60);
+        jButton2.setBounds(310, 270, 250, 60);
 
         jButton3.setFont(new java.awt.Font("Copperplate", 3, 18)); // NOI18N
-        jButton3.setText("Boss ");
+        jButton3.setText("Medio");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
             }
         });
         jPanel1.add(jButton3);
-        jButton3.setBounds(310, 270, 250, 60);
+        jButton3.setBounds(310, 190, 250, 60);
 
         Nombre.setFont(new java.awt.Font("Copperplate", 2, 48)); // NOI18N
         Nombre.setForeground(new java.awt.Color(255, 255, 255));
@@ -128,12 +128,16 @@ public class Test extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
+        Facil facil = new Facil(navecita1,nombre, 600,"dos", 0, 3, 2,puntaf,puntad, 1);
+        facil.setResizable(false);
+        facil.setSize(715,520);
+        facil.setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         this.dispose();
-        Facil facil = new Facil(navecita1,nombre, 600,"dos", 0, 4, 1,puntaf,puntad, 1);
+        Facil facil = new Facil(navecita1,nombre, 600,"tres", 0, 4, 1,puntaf,puntad, 1);
         facil.setResizable(false);
         facil.setSize(715,520);
         facil.setVisible(true);

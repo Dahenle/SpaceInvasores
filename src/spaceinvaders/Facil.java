@@ -64,10 +64,15 @@ public class Facil extends javax.swing.JFrame {
         
         if (nivel=="uno"){
            fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fondos/facil1.gif")));
+           fondo.setBounds(0,0,720,520);
         }
         if (nivel=="dos"){
-           fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fondos/sun.gif")));
+           fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fondos/fondo11.gif")));
            fondo.setBounds(0,0,720,520);
+        }
+        if (nivel=="tres"){
+            fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fondos/sun.gif")));
+            fondo.setBounds(0,0,720,520);
         }
         jPanel1.add(fondo);
 
@@ -315,6 +320,7 @@ public class Facil extends javax.swing.JFrame {
         jPanel3.setBounds(530, 0, 190, 110);
 
         mensaje.setFont(new java.awt.Font("Copperplate", 1, 24)); // NOI18N
+        mensaje.setForeground(new java.awt.Color(255, 255, 255));
         mensaje.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jPanel1.add(mensaje);
         mensaje.setBounds(0, 210, 720, 80);
@@ -342,7 +348,7 @@ public class Facil extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(contador, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(8, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel2);
