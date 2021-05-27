@@ -75,6 +75,7 @@ public class Facil extends javax.swing.JFrame {
             fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fondos/sun.gif")));
             fondo.setBounds(0,0,720,520);
         }
+        
         jPanel1.add(fondo);
 
             switch (navecita1){
