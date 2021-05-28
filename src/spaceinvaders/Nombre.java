@@ -8,7 +8,7 @@ public class Nombre extends javax.swing.JFrame {
     
     public Nombre(){
         initComponents();
-        sound = java.applet.Applet.newAudioClip(getClass().getResource("/sonidos/song.wav"));
+        sound = java.applet.Applet.newAudioClip(getClass().getResource("/sonidos/song_menus.wav"));
         sound.play();
     }
 

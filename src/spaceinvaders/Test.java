@@ -18,7 +18,7 @@ public class Test extends javax.swing.JFrame {
         this.puntaf1 = puntaf1;
         this.puntaf2 = puntaf2;
         this.puntaf3 = puntaf3;
-        sound = java.applet.Applet.newAudioClip(getClass().getResource("/sonidos/song.wav")); 
+        sound = java.applet.Applet.newAudioClip(getClass().getResource("/sonidos/song_menus.wav")); 
         sound.play();
         //condicional nave
         if (nave.matches("roja")==true){
