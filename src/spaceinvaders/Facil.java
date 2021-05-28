@@ -1,6 +1,7 @@
 
 package spaceinvaders;
 
+import java.applet.AudioClip;
 import java.awt.event.KeyEvent;
 import java.util.Random;
 import java.util.Timer;
@@ -27,24 +28,28 @@ public class Facil extends javax.swing.JFrame {
     int can_marcianos = 0;
     int mar_restantes = 100;
     int vida;
-    int puntajefinal1,puntajefinal2;
+    int puntajefinal1, puntajefinal2, puntajefinal3;
     int ronda;
+    AudioClip disparo, muerte;
     
 
-    public Facil(String navecita1, String nombre, int velocidad, String nivel, int punt, int filas, int vida,int puntajefinal1,int puntajefinal2, int ronda) {
+    public Facil(String navecita1, String nombre, int velocidad, String nivel, int punt, int filas, int vida,int puntajefinal1,int puntajefinal2, int puntajefina13, int ronda) {
         initComponents();
-        this.navecita1=navecita1;
-        this.nombre=nombre;
-        this.velocidad =velocidad;
-        this.nivel=nivel;
+        this.navecita1 = navecita1;
+        this.nombre = nombre;
+        this.velocidad = velocidad;
+        this.nivel = nivel;
         this.filas = filas;
         this.punt = punt;
-        this.vida=vida;
-        this.puntajefinal1=puntajefinal1;
-        this.puntajefinal2=puntajefinal2;
+        this.vida = vida;
+        this.puntajefinal1 = puntajefinal1;
+        this.puntajefinal2 = puntajefinal2;
+        this.puntajefinal3 = puntajefina13;
         this.ronda = ronda;
+        disparo = java.applet.Applet.newAudioClip(getClass().getResource("/sonidos/sfx_laser2.wav"));
+        muerte = java.applet.Applet.newAudioClip(getClass().getResource("/sonidos/sfx_lose.wav"));
         contador.setText(String.valueOf(ronda));
-        System.out.println(nivel);
+        
         switch (vida){
             case 1:
                vidas.setText("♥");
@@ -54,9 +59,8 @@ public class Facil extends javax.swing.JFrame {
                 break;
             case 3:
                 vidas.setText("♥♥♥");
-                break;
-                            
-        }
+                break;                           
+        } 
         
         puntos.setText(String.valueOf(punt));
         fondo = new JLabel();
@@ -74,8 +78,9 @@ public class Facil extends javax.swing.JFrame {
             fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fondos/sun.gif")));
             fondo.setBounds(0,0,720,520);
         }
+        
         jPanel1.add(fondo);
-
+        
             switch (navecita1){
                 case "roja":
                     navecita.setIcon(new javax.swing.ImageIcon(getClass().getResource("/naves/playerShip2_red.png")));
@@ -95,12 +100,10 @@ public class Facil extends javax.swing.JFrame {
                     navecita.setIcon(new javax.swing.ImageIcon(getClass().getResource("/naves/playerShip2_orange.png")));
                     colorlaser = "/lasers/fire06.png";
                     break;       
-            }
-    
-          
+            }  
         int y = 0;
         for (int i = 1; i <= filas; i++) {
-            select=color.nextInt(aliencolor1.length);
+            select = color.nextInt(aliencolor1.length);
             int x = 0; 
             for (int j = 1; j <= 9; j++) {
                 can_marcianos += 1;
@@ -118,10 +121,10 @@ public class Facil extends javax.swing.JFrame {
             }
             y = y+40;
         }
-            mar_restantes = can_marcianos;
-            System.out.println(mar_restantes);
-            Timer movimiento = new Timer();
-            TimerTask mov = new TimerTask(){
+        
+        mar_restantes = can_marcianos;
+        Timer movimiento = new Timer();
+        TimerTask mov = new TimerTask(){
             JLabel marcianos;
             int y_marciano;
             int x_marciano;
@@ -129,11 +132,8 @@ public class Facil extends javax.swing.JFrame {
             int j=1;
             int vida = vidas.getText().length();
             int contador1=Integer.parseInt(contador.getText());
-            
-
             @Override
-            public void run(){
-                
+            public void run(){     
                 for (int i = 1; i <= can_marcianos; i++){
                     marcianos = marciano[i];
                     x_marciano = marcianos.getX();
@@ -143,14 +143,13 @@ public class Facil extends javax.swing.JFrame {
                     }
                     if (x_marciano == 650 && marcianos.isVisible()==true){
                         tod = 0;
-                    }
-                    
+                    }  
                 }
                 
                 if (tod == 0){
                     for (int i = 1; i <= can_marcianos; i++){
                         if (i % 9 - 1 == 0){
-                           select=color.nextInt(aliencolor1.length);
+                           select = color.nextInt(aliencolor1.length);
                         }
                         marcianos = marciano[i];
                         if (j==0){
@@ -172,7 +171,6 @@ public class Facil extends javax.swing.JFrame {
                     }
                 }
                 
-
                 if (tod == 1){
                     for (int i = 1; i <= can_marcianos; i++){
                         marcianos = marciano[i];
@@ -205,11 +203,11 @@ public class Facil extends javax.swing.JFrame {
                     y_marciano = marcianos.getY();
                     x_marciano = marcianos.getX();
                     if (y_marciano == 360 && marcianos.isVisible()==true){
-                        vida = vida-1;
-                        System.out.println(vida);
+                        vida = vida - 1;
                         switch (vida){
                             case 0:
                                 vidas.setText("");
+                                muerte.play();
                                 mensaje.setText("Perdiste, pulsa cualquier tecla para regresar al inicio");
                                 movimiento.cancel();
                                 break;
@@ -222,31 +220,21 @@ public class Facil extends javax.swing.JFrame {
                             case 3:
                                 vidas.setText("♥♥♥");
                                 break;
-                            
                         }
+                        
                         mar_restantes -= 1;
                         
                         if (mar_restantes == 0 && vida>0){
                             mensaje.setText("Toque cualquier tecla para continuar");
                             movimiento.cancel();
                         }
+                        
                         marcianos.setIcon(null);
                         jPanel1.remove(marcianos);
-                        marcianos.setVisible(false);
-                        
-                        
-                    }
-                    
-                    
-                }
-                
-                
-                 
-                   
-            }
-             
-
-          
+                        marcianos.setVisible(false);   
+                    }                                      
+                }              
+            }         
         };
         movimiento.schedule(mov, velocidad, velocidad);                      
 }
@@ -364,12 +352,12 @@ public class Facil extends javax.swing.JFrame {
     private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
         int x_nav = navecita.getX();
         int y_nav = navecita.getY();
-        vida=vidas.getText().length();
+        vida = vidas.getText().length();
         if (mar_restantes <= 0 && vida > 0) {
            this.dispose();
             if (ronda<3){
-               velocidad-=100;
-               Facil facil = new Facil(navecita1,nombre,velocidad,nivel, punt, filas,vida,puntajefinal1,puntajefinal2, ronda+1);
+               velocidad -= 100;
+               Facil facil = new Facil(navecita1,nombre,velocidad,nivel, punt, filas,vida,puntajefinal1,puntajefinal2, puntajefinal3, ronda+1);
                facil.setResizable(false);
                facil.setSize(715,520);
                facil.setVisible(true);
@@ -378,32 +366,39 @@ public class Facil extends javax.swing.JFrame {
             if (ronda == 3) {
                 JOptionPane.showMessageDialog(null,"Has pasado el nivel, felicitaciones!");
                 this.dispose();
-                Test test = new Test(nombre, navecita1,puntajefinal1,puntajefinal2);
+                Test test = new Test(nombre, navecita1, puntajefinal1, puntajefinal2, puntajefinal3);
                 test.setVisible(true);
                 test.setResizable(false);
                 test.setSize(590,400);
             }
         }
-        
-        
-        
+      
         if (vidas.getText()==""){
-            if (nivel.equals("uno")==true){
-                JOptionPane.showMessageDialog(null, nombre+" tu record en este nivel es: "+puntajefinal1);
+            if (nivel.equals("uno")==true && puntajefinal1 > punt){
+                JOptionPane.showMessageDialog(null, nombre+" tu record en este nivel es de " +puntajefinal1+ " puntos");
             }
-            if (nivel.equals("dos")==true){
-                JOptionPane.showMessageDialog(null, nombre+" tu record en este nivel es: "+puntajefinal2); 
+            if (nivel.equals("dos")==true && puntajefinal2 > punt){
+                JOptionPane.showMessageDialog(null, nombre+" tu record en este nivel es de " +puntajefinal2+ " puntos"); 
+            }
+            if (nivel.equals("tres")==true && puntajefinal3 > punt){
+                JOptionPane.showMessageDialog(null, nombre+" tu record en este nivel es de " +puntajefinal3+ " puntos"); 
+            }
+            if (nivel.equals("uno")==true && puntajefinal1 == punt){
+                JOptionPane.showMessageDialog(null, "Felicidades "+nombre+"! Nuevo Record! Acabas de hacer "+punt+" puntos!");
+            }
+            if (nivel.equals("dos")==true && puntajefinal2 == punt){
+                JOptionPane.showMessageDialog(null, "Felicidades "+nombre+"! Nuevo Record! Acabas de hacer "+punt+" puntos!");
+            }
+            if (nivel.equals("tres")==true && puntajefinal3 == punt){
+                JOptionPane.showMessageDialog(null, "Felicidades "+nombre+"! Nuevo Record! Acabas de hacer "+punt+" puntos!");
             }
             this.dispose();
-            Test test = new Test(nombre, navecita1,puntajefinal1,puntajefinal2);
+            Test test = new Test(nombre, navecita1, puntajefinal1, puntajefinal2, puntajefinal3);
             test.setVisible(true);
             test.setResizable(false);
             test.setSize(590,400);
         }
-        
-        
-        
-        
+
         if (evt.getKeyChar() == 'a' || evt.getKeyChar() == 'A' || evt.getExtendedKeyCode() == KeyEvent.VK_LEFT){
             if(x_nav>0){
                 x_nav -= 50;
@@ -419,49 +414,52 @@ public class Facil extends javax.swing.JFrame {
         }
         
         if(evt.getKeyChar() == 'w' || evt.getKeyChar() == 'W' || evt.getExtendedKeyCode() == KeyEvent.VK_UP){
-
-            JLabel laserxd = new JLabel();
-            laserxd.setLocation(navecita.getX()+50, navecita.getY()+40);
-            laserxd.setIcon(new javax.swing.ImageIcon(getClass().getResource(colorlaser)));
-            laserxd.setSize(20, 60);
-            jPanel1.add(laserxd, 1);
+            JLabel laser = new JLabel();
+            laser.setLocation(navecita.getX()+50, navecita.getY()+40);
+            laser.setIcon(new javax.swing.ImageIcon(getClass().getResource(colorlaser)));
+            laser.setSize(20, 60);
+            jPanel1.add(laser, 1);
             jPanel1.validate();
+            if (mar_restantes > 0 && vida > 0) {
+                disparo.play();          
+            }
             Timer time = new Timer();
             TimerTask task = new TimerTask(){
                 JLabel marcianos;
-                int y_laser = laserxd.getY();
-                int x_laser = laserxd.getX();
+                int y_laser = laser.getY();
+                int x_laser = laser.getX();
                 int x_marciano;
                 int y_marciano;
                 int can_marciano;
                 @Override
                 public void run(){
-                    
                     if (y_laser > -60){
                         y_laser = y_laser - 10;
-                        laserxd.setLocation(x_laser, y_laser);
+                        laser.setLocation(x_laser, y_laser);
                     }else{
-                        jPanel1.remove(laserxd);
+                        jPanel1.remove(laser);
                         time.cancel();
                     }
                     for (int i = 1; i <= can_marcianos; i++) {
                         marcianos = marciano[i];
-                        x_laser = laserxd.getX();
-                        y_laser = laserxd.getY();
+                        x_laser = laser.getX();
+                        y_laser = laser.getY();
                         x_marciano = marcianos.getX();
-                        y_marciano = marcianos.getY();
-                        
+                        y_marciano = marcianos.getY();     
                         if(x_marciano == x_laser && y_marciano == y_laser && marcianos.isVisible()==true){
-                                mar_restantes -= 1;
                                 marcianos.setIcon(null);
-                                jPanel1.remove(laserxd);
+                                jPanel1.remove(laser);
                                 jPanel1.remove(marcianos);
+                                mar_restantes -= 1;
                                 punt=punt+10;
                                 if (nivel=="uno"&&puntajefinal1<punt){
                                     puntajefinal1=punt;
                                 }
                                 if (nivel=="dos"&&puntajefinal2<punt){
                                     puntajefinal2=punt;
+                                }
+                                if (nivel == "tres" && puntajefinal3<punt){
+                                    puntajefinal3 = punt;
                                 }
                                 punto = String.valueOf(punt);
                                 puntos.setText(punto);
@@ -475,16 +473,10 @@ public class Facil extends javax.swing.JFrame {
                         if (vidas.getText()==""){
                             time.cancel();
                         }
-
-                    }
-                     
-                    
-                                
+                    }                                                             
                 }
             };
-            
             time.schedule(task, 0, 40);
-
             }    
                  
     }//GEN-LAST:event_formKeyPressed

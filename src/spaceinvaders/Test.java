@@ -1,10 +1,13 @@
 package spaceinvaders;
 
+import java.applet.AudioClip;
+
 public class Test extends javax.swing.JFrame {
 
     String nombre,nave,navecita1;
-    int puntaf,puntad;
-    public Test(String nombre, String nave,int puntaf,int puntad) {
+    int puntaf1, puntaf2, puntaf3;
+    AudioClip sound;
+    public Test(String nombre, String nave, int puntaf1, int puntaf2, int puntaf3) {
         initComponents();
         this.setVisible(true);
         this.setResizable(false);
@@ -12,10 +15,11 @@ public class Test extends javax.swing.JFrame {
         this.nombre = nombre;
         this.nave = nave;
         this.Nombre.setText(nombre);
-        this.puntaf=puntaf;
-        this.puntad=puntad;
-
-        
+        this.puntaf1 = puntaf1;
+        this.puntaf2 = puntaf2;
+        this.puntaf3 = puntaf3;
+        sound = java.applet.Applet.newAudioClip(getClass().getResource("/sonidos/song.wav")); 
+        sound.play();
         //condicional nave
         if (nave.matches("roja")==true){
             Nave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/naves/playerShip2_red.png")));
@@ -33,12 +37,8 @@ public class Test extends javax.swing.JFrame {
                     this.navecita1="naranja";
                 }
             }  
-        }
-        
-            
+        }           
     }
-
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -121,27 +121,29 @@ public class Test extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         this.dispose();
-        Facil facil = new Facil(navecita1,nombre,1000,"uno", 0, 2, 3,puntaf,puntad, 1);
+        Facil facil = new Facil(navecita1,nombre,1000,"uno", 0, 2, 3, puntaf1, puntaf2, puntaf3, 1);
         facil.setResizable(false);
         facil.setSize(715,520);
         facil.setVisible(true);
+        sound.stop();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         this.dispose();
-        Facil facil = new Facil(navecita1,nombre, 600,"dos", 0, 3, 2,puntaf,puntad, 1);
+        Facil facil = new Facil(navecita1,nombre, 600,"dos", 0, 3, 2, puntaf1, puntaf2, puntaf3, 1);
         facil.setResizable(false);
         facil.setSize(715,520);
         facil.setVisible(true);
+        sound.stop();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         this.dispose();
-        Facil facil = new Facil(navecita1,nombre, 600,"tres", 0, 4, 1,puntaf,puntad, 1);
+        Facil facil = new Facil(navecita1,nombre, 600,"tres", 0, 4, 1, puntaf1, puntaf2, puntaf3, 1);
         facil.setResizable(false);
         facil.setSize(715,520);
         facil.setVisible(true);
-
+        sound.stop();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**

@@ -1,13 +1,15 @@
 package spaceinvaders;
 
-
+import java.applet.AudioClip;
 
 public class Nombre extends javax.swing.JFrame {
-
-
+    
+    AudioClip sound;
+    
     public Nombre(){
         initComponents();
-
+        sound = java.applet.Applet.newAudioClip(getClass().getResource("/sonidos/song.wav"));
+        sound.play();
     }
 
     @SuppressWarnings("unchecked")
@@ -78,12 +80,11 @@ public class Nombre extends javax.swing.JFrame {
             error.setText("Debe tener min 3 caracteres");
         }else{
             this.dispose();
-            Nave select = new Nave(this.jTextField1.getText());
+            Nave select = new Nave(this.jTextField1.getText(), sound);
             select.setResizable(false);
             select.setSize(590, 400);
             select.setVisible(true);
         }
-
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
@@ -99,6 +100,4 @@ public class Nombre extends javax.swing.JFrame {
     void dispuse() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
-
-
 }

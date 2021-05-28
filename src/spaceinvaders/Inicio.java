@@ -1,6 +1,5 @@
 package spaceinvaders;
 
-
 public class Inicio extends javax.swing.JFrame {
 
     /**

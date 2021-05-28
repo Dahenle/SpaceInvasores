@@ -1,11 +1,15 @@
 package spaceinvaders;
 
+import java.applet.AudioClip;
+
 public class Nave extends javax.swing.JFrame {
 
     String nombre;
-    int puntajefinal1,puntajefinal2;
-    public Nave(String nombre) {
+    int puntajefinal1, puntajefinal2, puntajefinal13;
+    AudioClip sound;
+    public Nave(String nombre, AudioClip sound) {
        initComponents();
+       this.sound = sound;
        this.nombre = nombre;
     }
 
@@ -82,22 +86,26 @@ public class Nave extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void naveRojaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_naveRojaActionPerformed
-        Test test = new Test(nombre, "roja",puntajefinal1,puntajefinal2);
+        sound.stop();
+        Test test = new Test(nombre, "roja",puntajefinal1,puntajefinal2, puntajefinal13);
         this.dispose();
     }//GEN-LAST:event_naveRojaActionPerformed
 
     private void naveAzulActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_naveAzulActionPerformed
-        Test test = new Test(nombre, "azul",puntajefinal1,puntajefinal2);
+        sound.stop();
+        Test test = new Test(nombre, "azul",puntajefinal1,puntajefinal2, puntajefinal13);
         this.dispose();
     }//GEN-LAST:event_naveAzulActionPerformed
 
     private void naveVerdeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_naveVerdeActionPerformed
-        Test test = new Test(nombre, "verde",puntajefinal1,puntajefinal2);
+        sound.stop();
+        Test test = new Test(nombre, "verde",puntajefinal1,puntajefinal2, puntajefinal13);
         this.dispose();
     }//GEN-LAST:event_naveVerdeActionPerformed
 
     private void naveNaranjeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_naveNaranjeActionPerformed
-        Test test = new Test(nombre, "naranja",puntajefinal1,puntajefinal2); 
+        sound.stop();
+        Test test = new Test(nombre, "naranja",puntajefinal1,puntajefinal2, puntajefinal13); 
         this.dispose();
     }//GEN-LAST:event_naveNaranjeActionPerformed
 
