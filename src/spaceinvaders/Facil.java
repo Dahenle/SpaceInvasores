@@ -3,7 +3,6 @@ package spaceinvaders;
 
 import java.applet.AudioClip;
 import java.awt.event.KeyEvent;
-import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 import javax.swing.JLabel;
@@ -14,10 +13,9 @@ import javax.swing.JOptionPane;
 public class Facil extends javax.swing.JFrame {
 
     String navecita1,nombre, colorlaser;
-    String [] aliencolor1 = {"Verde","Rojo","Morado","Rosado","Naranja","Azul"};
+    String [] aliencolor1 = {"Verde","Rojo","Morado","Rosado","Naranja","Azul","Amarillo"};
     String aliencolor;
-    Random color = new Random();
-    int select;
+    int select = -1;
     int punt,velocidad;
     String punto;
     Timer timer;
@@ -48,6 +46,7 @@ public class Facil extends javax.swing.JFrame {
         this.puntajefinal2 = puntajefinal2;
         this.puntajefinal3 = puntajefina13;
         this.ronda = ronda;
+        
         disparo = java.applet.Applet.newAudioClip(getClass().getResource("/sonidos/sfx_laser2.wav"));
         muerte = java.applet.Applet.newAudioClip(getClass().getResource("/sonidos/sfx_lose.wav"));
         cancion = java.applet.Applet.newAudioClip(getClass().getResource("/sonidos/song_juego.wav"));
@@ -69,8 +68,9 @@ public class Facil extends javax.swing.JFrame {
         puntos.setText(String.valueOf(punt));
         fondo = new JLabel();
         fondo.setBounds(0,0,720,520);
-        cancion.play();
-        
+        if (ronda ==1){
+            cancion.play();
+        }    
         if (nivel=="uno"){
            fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fondos/facil1.gif")));
            fondo.setBounds(0,0,720,520);
@@ -108,17 +108,14 @@ public class Facil extends javax.swing.JFrame {
             }  
         int y = 0;
         for (int i = 1; i <= filas; i++) {
-            select = color.nextInt(aliencolor1.length);
+            select = (select+1)% 7;
             int x = 0; 
             for (int j = 1; j <= 9; j++) {
                 can_marcianos += 1;
                 marciano[can_marcianos] = new JLabel();
                 marciano[can_marcianos].setSize(120, 130);
-                if (i % 2 == 0){
-                   marciano[can_marcianos].setIcon(new javax.swing.ImageIcon(getClass().getResource("/alien/"+aliencolor1[select]+".png"))); 
-                }else{
-                   marciano[can_marcianos].setIcon(new javax.swing.ImageIcon(getClass().getResource("/alien/"+aliencolor1[select]+".png")));
-                } 
+                marciano[can_marcianos].setIcon(new javax.swing.ImageIcon(getClass().getResource("/alien/"+aliencolor1[select]+".png"))); 
+                marciano[can_marcianos].setIcon(new javax.swing.ImageIcon(getClass().getResource("/alien/"+aliencolor1[select]+".png")));
                 marciano[can_marcianos].setLocation(x, y);
                 jPanel1.add(marciano[can_marcianos], 1);
                 jPanel1.validate();
@@ -154,7 +151,7 @@ public class Facil extends javax.swing.JFrame {
                 if (tod == 0){
                     for (int i = 1; i <= can_marcianos; i++){
                         if (i % 9 - 1 == 0){
-                           select = color.nextInt(aliencolor1.length);
+                           select = (select+1)% 7;
                         }
                         marcianos = marciano[i];
                         if (j==0){
@@ -180,7 +177,7 @@ public class Facil extends javax.swing.JFrame {
                     for (int i = 1; i <= can_marcianos; i++){
                         marcianos = marciano[i];
                         if (i % 9 - 1 == 0){
-                               select=color.nextInt(aliencolor1.length);
+                               select = (select+1)% 7;
                         }
                         if (j>0){
                            x_marciano = marcianos.getX();
