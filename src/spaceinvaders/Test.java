@@ -6,7 +6,7 @@ public class Test extends javax.swing.JFrame {
 
     String nombre,nave,navecita1;
     int puntaf1, puntaf2, puntaf3;
-    AudioClip sound;
+    AudioClip sound, cancion;
     public Test(String nombre, String nave, int puntaf1, int puntaf2, int puntaf3) {
         initComponents();
         this.setVisible(true);
@@ -19,6 +19,7 @@ public class Test extends javax.swing.JFrame {
         this.puntaf2 = puntaf2;
         this.puntaf3 = puntaf3;
         sound = java.applet.Applet.newAudioClip(getClass().getResource("/sonidos/song_menus.wav")); 
+        cancion = java.applet.Applet.newAudioClip(getClass().getResource("/sonidos/song_juego.wav")); 
         sound.play();
         //condicional nave
         if (nave.matches("roja")==true){
@@ -121,7 +122,7 @@ public class Test extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         this.dispose();
-        Facil facil = new Facil(navecita1,nombre,1000,"uno", 0, 2, 3, puntaf1, puntaf2, puntaf3, 1);
+        Facil facil = new Facil(navecita1,nombre,1000,"uno", 0, 2, 3, puntaf1, puntaf2, puntaf3, 1, cancion);
         facil.setResizable(false);
         facil.setSize(715,520);
         facil.setVisible(true);
@@ -130,7 +131,7 @@ public class Test extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         this.dispose();
-        Facil facil = new Facil(navecita1,nombre, 600,"dos", 0, 3, 2, puntaf1, puntaf2, puntaf3, 1);
+        Facil facil = new Facil(navecita1,nombre, 600,"dos", 0, 3, 2, puntaf1, puntaf2, puntaf3, 1, cancion);
         facil.setResizable(false);
         facil.setSize(715,520);
         facil.setVisible(true);
@@ -139,7 +140,7 @@ public class Test extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         this.dispose();
-        Facil facil = new Facil(navecita1,nombre, 600,"tres", 0, 4, 1, puntaf1, puntaf2, puntaf3, 1);
+        Facil facil = new Facil(navecita1,nombre, 600,"tres", 0, 4, 1, puntaf1, puntaf2, puntaf3, 1, cancion);
         facil.setResizable(false);
         facil.setSize(715,520);
         facil.setVisible(true);

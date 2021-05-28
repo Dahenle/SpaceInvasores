@@ -12,9 +12,8 @@ import javax.swing.JOptionPane;
 
 public class Facil extends javax.swing.JFrame {
 
-    String navecita1,nombre, colorlaser;
+    String navecita1, nombre, colorlaser;
     String [] aliencolor1 = {"Verde","Rojo","Morado","Rosado","Naranja","Azul","Amarillo"};
-    String aliencolor;
     int select = -1;
     int punt,velocidad;
     String punto;
@@ -33,7 +32,7 @@ public class Facil extends javax.swing.JFrame {
     
     
 
-    public Facil(String navecita1, String nombre, int velocidad, String nivel, int punt, int filas, int vida,int puntajefinal1,int puntajefinal2, int puntajefina13, int ronda) {
+    public Facil(String navecita1, String nombre, int velocidad, String nivel, int punt, int filas, int vida,int puntajefinal1,int puntajefinal2, int puntajefina13, int ronda, AudioClip cancion) {
         initComponents();
         this.navecita1 = navecita1;
         this.nombre = nombre;
@@ -46,10 +45,10 @@ public class Facil extends javax.swing.JFrame {
         this.puntajefinal2 = puntajefinal2;
         this.puntajefinal3 = puntajefina13;
         this.ronda = ronda;
+        this.cancion = cancion;
         
         disparo = java.applet.Applet.newAudioClip(getClass().getResource("/sonidos/sfx_laser2.wav"));
         muerte = java.applet.Applet.newAudioClip(getClass().getResource("/sonidos/sfx_lose.wav"));
-        cancion = java.applet.Applet.newAudioClip(getClass().getResource("/sonidos/song_juego.wav"));
         contador.setText(String.valueOf(ronda));
         inicio = System.currentTimeMillis();
         
@@ -359,15 +358,15 @@ public class Facil extends javax.swing.JFrame {
            this.dispose();
             if (ronda<3){
                velocidad -= 100;
-               Facil facil = new Facil(navecita1,nombre,velocidad,nivel, punt, filas,vida,puntajefinal1,puntajefinal2, puntajefinal3, ronda+1);
+               Facil facil = new Facil(navecita1,nombre,velocidad,nivel, punt, filas,vida,puntajefinal1,puntajefinal2, puntajefinal3, ronda+1, cancion);
                facil.setResizable(false);
                facil.setSize(715,520);
                facil.setVisible(true);
                contador.setText(String.valueOf(ronda)); 
             }
             if (ronda == 3) {
-                cancion.stop();
                 JOptionPane.showMessageDialog(null,"Has pasado el nivel, felicitaciones!");
+                cancion.stop();     
                 this.dispose();
                 Test test = new Test(nombre, navecita1, puntajefinal1, puntajefinal2, puntajefinal3);
                 test.setVisible(true);
